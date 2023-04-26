@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "838622038194",
+    "project_id": "tfgraulburguilloempty",
+    "storage_bucket": "tfgraulburguilloempty.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838622038194:android:d95708dfc817ed40c8a1ab",
+        "android_client_info": {
+          "package_name": "com.example.tfgraulburguilloempty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838622038194-nqn6ei0eepthsnkedlm69ki4rv8ibgn2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgjqI9CkT_RcBrD09roorD3klhUKTSd5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838622038194-nqn6ei0eepthsnkedlm69ki4rv8ibgn2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
