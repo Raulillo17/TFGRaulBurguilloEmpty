@@ -12,6 +12,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        
+    </style>
+    
+    <style name="SplashTheme" parent="Theme.TFGRaulBurguilloEmpty"> 
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+        
     </style>
 
     <style name="Theme.TFGRaulBurguilloEmpty.NoActionBar">

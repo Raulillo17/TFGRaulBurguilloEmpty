@@ -36,6 +36,8 @@ class AuthActivity : AppCompatActivity(){
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Thread.sleep(3000)
+        setTheme(R.style.Theme_TFGRaulBurguilloEmpty)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
         ResgisterButton = findViewById<Button>(R.id.Registerbutton)

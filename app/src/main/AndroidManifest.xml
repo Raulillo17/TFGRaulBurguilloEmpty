@@ -29,7 +29,8 @@
             android:theme="@style/Theme.TFGRaulBurguilloEmpty.NoActionBar" />
         <activity
             android:name=".views.AuthActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
