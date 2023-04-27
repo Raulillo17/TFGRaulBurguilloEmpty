@@ -13,6 +13,16 @@
         android:theme="@style/Theme.TFGRaulBurguilloEmpty"
         tools:targetApi="31">
         <activity
+            android:name=".views.SplashScreen"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".views.TeamsActivity"
             android:exported="false"
             android:label="@string/title_activity_teams"
@@ -30,13 +40,7 @@
         <activity
             android:name=".views.AuthActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            tools:ignore="WrongManifestParent" />
     </application>
 
 </manifest>

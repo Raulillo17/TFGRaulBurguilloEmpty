@@ -36,8 +36,8 @@ class AuthActivity : AppCompatActivity(){
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Thread.sleep(3000)
-        setTheme(R.style.Theme_TFGRaulBurguilloEmpty)
+        //Thread.sleep(3000)
+        //setTheme(R.style.Theme_TFGRaulBurguilloEmpty)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
         ResgisterButton = findViewById<Button>(R.id.Registerbutton)
@@ -156,7 +156,7 @@ class AuthActivity : AppCompatActivity(){
         }
     }
     private fun addData() {
-        val user: MutableMap<String, Any> = HashMap() // diccionario key value
+        val user: MutableMap<String, String> = HashMap() // diccionario key value
         user["email"] = EmaileditText.text.toString()
         user["password"] = PasswordeditText.text.toString()
         db.collection("users")
