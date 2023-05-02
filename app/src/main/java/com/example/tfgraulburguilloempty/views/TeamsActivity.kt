@@ -8,9 +8,15 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.databinding.ActivityTeamsBinding
+import com.example.tfgraulburguilloempty.views.adapters.adapterTeams
+import com.example.tfgraulburguilloempty.views.model.Equipos
+import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -27,6 +33,10 @@ class TeamsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityTeamsBinding
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var adapter: adapterTeams
+    private lateinit var rvteams: RecyclerView
+    private lateinit var equipos: List<Equipos>
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +70,27 @@ class TeamsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 //        searchView.setOnQueryTextListener(this)
         return true
     }
+
+    private fun getEquipos() {
+        viewModel.getAllEquipos().observe(this, Observer { it ->
+            it?.let{
+                equipos = it
+                showEquipos()
+            }
+        })
+    }
+
+    private fun showEquipos() {
+        adapter.setEquipos(equipos)
+    }
+
+    private fun initRV() {
+        rvteams  = findViewById<RecyclerView>(R.id.rvteams)
+        adapter = adapterTeams(this,R.layout.rowteams)
+        rvteams.adapter = adapter
+        rvteams.layoutManager = LinearLayoutManager(this)
+    }
+
     private fun updateUI(user: FirebaseUser?) {
         user?.let {
             toast("user: ${user.uid}, email: ${user.email}")
