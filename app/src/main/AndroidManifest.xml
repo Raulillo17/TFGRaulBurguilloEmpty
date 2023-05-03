@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:usesCleartextTraffic="true">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,9 +15,16 @@
         android:theme="@style/Theme.TFGRaulBurguilloEmpty"
         tools:targetApi="31">
         <activity
+            android:name=".BottonNavigation"
+            android:exported="false" />
+        <activity
+            android:name=".BootmNavigation"
+            android:exported="false"
+            android:label="@string/title_activity_bootm_navigation" />
+        <activity
             android:name=".views.SplashScreen"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
