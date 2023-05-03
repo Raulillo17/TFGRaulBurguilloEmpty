@@ -144,6 +144,7 @@ class AuthActivity : AppCompatActivity(){
                         if (it.isSuccessful){
                             addData()
                             showTeamsActivity(cuenta.email ?: "", ProviderType.GOOGLE)
+
                         }else{
                             showAlert()
                         }

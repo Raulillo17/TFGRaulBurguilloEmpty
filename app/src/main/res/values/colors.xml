@@ -10,4 +10,10 @@
     <color name="colorPrimary">#039BE5</color>
     <color name="colorPrimaryDark">#2C384A</color>
     <color name="transparent">#00FFFFFF</color>
+
+
+    <color name="green_dark">#062925</color>
+    <color name="green_normal">#044a42</color>
+    <color name="green_ligth">#3a9188</color>
+    <color name="green_light_2">#b8e1dd</color>
 </resources>

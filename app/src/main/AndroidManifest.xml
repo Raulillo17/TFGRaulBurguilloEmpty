@@ -15,12 +15,9 @@
         android:theme="@style/Theme.TFGRaulBurguilloEmpty"
         tools:targetApi="31">
         <activity
-            android:name=".BottonNavigation"
-            android:exported="false" />
-        <activity
-            android:name=".BootmNavigation"
+            android:name=".views.BottomNavigation"
             android:exported="false"
-            android:label="@string/title_activity_bootm_navigation" />
+            android:label="@string/title_activity_bottom_navigation" />
         <activity
             android:name=".views.SplashScreen"
             android:exported="true"
