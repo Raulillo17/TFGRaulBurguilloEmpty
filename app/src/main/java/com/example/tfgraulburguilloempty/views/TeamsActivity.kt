@@ -5,22 +5,22 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.databinding.ActivityTeamsBinding
 import com.example.tfgraulburguilloempty.views.adapters.adapterTeams
-import com.example.tfgraulburguilloempty.views.model.Equipos
+import com.example.tfgraulburguilloempty.views.model.Respuesta
+import com.example.tfgraulburguilloempty.views.model.Team
 import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 
 enum class ProviderType{
@@ -28,6 +28,7 @@ enum class ProviderType{
     GOOGLE
 }
 class TeamsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+    private lateinit var teams: List<Team>
     private lateinit var searchView: SearchView
     private var auth: FirebaseAuth? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -35,7 +36,6 @@ class TeamsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var adapter: adapterTeams
     private lateinit var rvteams: RecyclerView
-    private lateinit var equipos: List<Equipos>
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +60,10 @@ class TeamsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         prefs.putString("email", email)
         prefs.putString("provider", provider)
         prefs.apply()
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        getEquipos()
+        initRV()
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
@@ -72,16 +76,16 @@ class TeamsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     private fun getEquipos() {
-        viewModel.getAllEquipos().observe(this, Observer { it ->
+        viewModel.getTeams().observe(this, Observer { it ->
             it?.let{
-                equipos = it
+                teams = it
                 showEquipos()
             }
         })
     }
 
     private fun showEquipos() {
-        adapter.setEquipos(equipos)
+        adapter.setEquipos(teams)
     }
 
     private fun initRV() {
@@ -89,15 +93,6 @@ class TeamsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         adapter = adapterTeams(this,R.layout.rowteams)
         rvteams.adapter = adapter
         rvteams.layoutManager = LinearLayoutManager(this)
-    }
-
-    private fun updateUI(user: FirebaseUser?) {
-        user?.let {
-            toast("user: ${user.uid}, email: ${user.email}")
-        }
-    }
-    private fun toast(msg:String){
-        Toast.makeText(this,msg, Toast.LENGTH_LONG).show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

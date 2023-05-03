@@ -8,7 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
-import com.example.tfgraulburguilloempty.views.model.Equipos
+import com.example.tfgraulburguilloempty.views.model.Respuesta
+import com.example.tfgraulburguilloempty.views.model.Team
 import com.squareup.picasso.Picasso
 
 
@@ -16,7 +17,7 @@ class adapterTeams(val context: Context,
                        val layout: Int
 ) : RecyclerView.Adapter<adapterTeams.ViewHolder>() {
 
-    private var dataList: List<Equipos> = emptyList()
+    private var dataList: List<Team> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -33,28 +34,38 @@ class adapterTeams(val context: Context,
         return dataList.size
     }
 
-    internal fun setEquipos(equipos: List<Equipos>) {
+    internal fun setEquipos(equipos: List<Team>) {
         this.dataList = equipos
         notifyDataSetChanged()
     }
 
 
     class ViewHolder(viewlayout: View, val context: Context) : RecyclerView.ViewHolder(viewlayout) {
-        fun bind(dataItem: Equipos){
+        fun bind(dataItem: Team){
+            //val dataItemList: List<Respuesta> = listOf(dataItem)// obtén la lista de objetos DataItem
+            //val dataItemToCompare: Respuesta = dataItem// obtén el objeto DataItem a comparar
+
+
             // itemview es el item de diseño
             // al que hay que poner los datos del objeto dataItem
             val ivteams = itemView.findViewById(R.id.ivteams) as ImageView
             val tvnombrecategoria = itemView.findViewById(R.id.tvnombreteam) as TextView
 
-            tvnombrecategoria.text = dataItem.Nombre
 
-            // foto de internet a traves de Picasso
-            Picasso.get().load("https://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500/${dataItem.idimagen}.png&h=200&w=200\n").into(ivteams)
 
+            if (dataItem.logo == null || dataItem.name == null || dataItem.nbaFranchise == false) {
+                        View.GONE
+                    } else {
+                        Picasso.get().load("${dataItem.logo}").into(ivteams)
+                        tvnombrecategoria.text = dataItem.name
+                    }
+                //val id = context.resources.getIdentifier("default_img" , "drawable", context.packageName)
+                //ivteams.setImageResource(id)
+                //tvnombrecategoria.text = "Texto predeterminado"
+                // Si el valor es nulo, ocultamos el CardView
 
             itemView.tag = dataItem
 
         }
 
-    }
-}
+    }}

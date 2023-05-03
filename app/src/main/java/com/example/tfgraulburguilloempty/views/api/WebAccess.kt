@@ -21,7 +21,7 @@ object WebAccess {
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .baseUrl("https://free-nba.p.rapidapi.com/teams?page=0")
+            .baseUrl("https://free-nba.p.rapidapi.com/")
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(HeaderInterceptor())

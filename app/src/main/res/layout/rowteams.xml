@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/white"
-    android:onClick="onClickHero"
+    android:onClick="onClickTeam"
     card_view:cardCornerRadius="16dp"
     card_view:cardElevation="1dp"
     android:layout_margin="2dp"
