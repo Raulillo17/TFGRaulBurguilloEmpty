@@ -124,7 +124,7 @@ class AuthActivity : AppCompatActivity(){
     }
 
     private fun showTeamsActivity(email: String, provider: ProviderType){
-        val TeamsActivityIntent = Intent(this, TeamsActivity::class.java).apply {
+        val TeamsActivityIntent = Intent(this, BottomNavigation::class.java).apply {
             putExtra("email", email)
             putExtra("provider", provider.name)
         }

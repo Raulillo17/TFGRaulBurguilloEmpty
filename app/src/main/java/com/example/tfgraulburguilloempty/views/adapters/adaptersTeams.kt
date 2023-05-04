@@ -8,13 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
-import com.example.tfgraulburguilloempty.views.model.Respuesta
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.squareup.picasso.Picasso
 
 
-class adapterTeams(val context: Context,
-                       val layout: Int
+class adapterTeams(
+    val context: Context,
+    val layout: Int
 ) : RecyclerView.Adapter<adapterTeams.ViewHolder>() {
 
     private var dataList: List<Team> = emptyList()
@@ -45,13 +45,10 @@ class adapterTeams(val context: Context,
             //val dataItemList: List<Respuesta> = listOf(dataItem)// obtén la lista de objetos DataItem
             //val dataItemToCompare: Respuesta = dataItem// obtén el objeto DataItem a comparar
 
-
             // itemview es el item de diseño
             // al que hay que poner los datos del objeto dataItem
             val ivteams = itemView.findViewById(R.id.ivteams) as ImageView
             val tvnombrecategoria = itemView.findViewById(R.id.tvnombreteam) as TextView
-
-
 
             if (dataItem.logo == null || dataItem.name == null || dataItem.nbaFranchise == false) {
                         View.GONE

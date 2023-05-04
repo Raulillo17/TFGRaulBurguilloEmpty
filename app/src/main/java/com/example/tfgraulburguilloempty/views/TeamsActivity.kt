@@ -15,11 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.databinding.ActivityTeamsBinding
 import com.example.tfgraulburguilloempty.views.adapters.adapterTeams
-import com.example.tfgraulburguilloempty.views.model.Respuesta
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -87,7 +85,7 @@ class TeamsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private fun initRV() {
         rvteams  = findViewById<RecyclerView>(R.id.rvteams)
-        adapter = adapterTeams(this,R.layout.rowteams)
+        //adapter = adapterTeams(this,R.layout.rowteams)
         rvteams.adapter = adapter
         rvteams.layoutManager = LinearLayoutManager(this)
     }

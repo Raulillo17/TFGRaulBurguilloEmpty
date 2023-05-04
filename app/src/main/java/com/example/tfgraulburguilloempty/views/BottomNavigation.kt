@@ -5,20 +5,18 @@ import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.tfgraulburguilloempty.R
-import com.example.tfgraulburguilloempty.databinding.ActivityBottomNavigationBinding
+import com.example.tfgraulburguilloempty.databinding.ActivityPlayersBinding
+import com.example.tfgraulburguilloempty.databinding.ActivityTeamsBinding
+import com.example.tfgraulburguilloempty.views.fragments.FragmentList
 import com.example.tfgraulburguilloempty.views.fragments.FragmentoDOS
 import com.example.tfgraulburguilloempty.views.fragments.FragmentoTRES
-import com.example.tfgraulburguilloempty.views.fragments.FragmentoUNO
 
 class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
 
         private lateinit var nav_view: BottomNavigationView
+    private lateinit var binding: BottomNavigationView
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -33,7 +31,7 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
             var fragment: Fragment? = null
             when (item.itemId) {
                 R.id.navigation_uno -> {
-                    fragment = FragmentoUNO()
+                    fragment = FragmentList()
                 }
                 R.id.navigation_dos-> {
                     fragment = FragmentoDOS()
@@ -48,7 +46,7 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
 
     private fun setInitialFragment() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.frame, FragmentoUNO())
+        fragmentTransaction.add(R.id.frame, FragmentList())
         fragmentTransaction.commit()
     }
     private fun replaceFragment(fragment: Fragment) {
