@@ -35,9 +35,48 @@
             android:textAlignment="center"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.483"
+            card_view:layout_constraintHorizontal_bias="0.464"
             card_view:layout_constraintStart_toEndOf="@+id/ivteams"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintVertical_bias="0.483" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:text="Record: "
+            card_view:layout_constraintStart_toStartOf="@+id/tvnombreteam"
+            tools:layout_editor_absoluteY="51dp" />
+
+        <TextView
+            android:id="@+id/tvRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:layout_constraintEnd_toEndOf="@+id/tvnombreteam"
+            card_view:layout_constraintHorizontal_bias="0.298"
+            card_view:layout_constraintStart_toEndOf="@+id/textView"
+            tools:layout_editor_absoluteY="51dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="87dp"
+            android:layout_height="23dp"
+            android:layout_marginBottom="1dp"
+            android:text="Conferencia:"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvnombreteam"
+            tools:layout_editor_absoluteX="151dp" />
+
+        <TextView
+            android:id="@+id/tvConferencia"
+            android:layout_width="75dp"
+            android:layout_height="22dp"
+            android:text="TextView"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.426"
+            card_view:layout_constraintStart_toEndOf="@+id/textView3"
+            tools:layout_editor_absoluteY="78dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

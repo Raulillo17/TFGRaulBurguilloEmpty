@@ -7,13 +7,14 @@ class MainRepository {
 
     val service = WebAccess.basketService
 
-    suspend fun getTeams(): List<Team> {
-        val webResponse = service.getTeams().await()
+    suspend fun getEquipos(): List<Team> {
+        val webResponse = service.getEquipos().await()
         if (webResponse.isSuccessful) {
-            return webResponse.body()!!.response
+            return webResponse.body()!!.equipos
         }
         return emptyList()
     }
+
 
 
 }

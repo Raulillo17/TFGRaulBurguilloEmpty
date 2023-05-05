@@ -71,7 +71,7 @@ class TeamsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     private fun getEquipos() {
-        viewModel.getTeams().observe(this, Observer { it ->
+        viewModel.getEquipos().observe(this, Observer { it ->
             it?.let{
                 teams = it
                 showEquipos()

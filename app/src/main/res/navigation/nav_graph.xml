@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.tfgraulburguilloempty.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:name="com.example.tfgraulburguilloempty.views.fragments.FragmentList"
+        android:label="All Teams"
+        tools:layout="@layout/fragment_fragment_list">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -17,12 +17,22 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.tfgraulburguilloempty.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:name="com.example.tfgraulburguilloempty.views.fragments.FragmentoDOS"
+        android:label="Conference Teams"
+        tools:layout="@layout/fragment_fragmento_d_o_s">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/ThirdFragment"
+            app:destination="@id/ThirdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ThirdFragment"
+        android:name="com.example.tfgraulburguilloempty.views.fragments.FragmentoTRES"
+        android:label="Division Teams"
+        tools:layout="@layout/fragment_fragmento_t_r_e_s">
+
+        <action
+            android:id="@+id/ThirdFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

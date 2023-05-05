@@ -1,10 +1,10 @@
 package com.example.tfgraulburguilloempty.views.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,11 +25,12 @@ private const val ARG_PARAM2 = "param2"
  */
 class FragmentList : Fragment() {
     private lateinit var rvTeams2: RecyclerView
-    private lateinit var teams: List<Team>
+    private lateinit var equipos: List<Team>
     private val binding get() = _binding!!
     private var _binding: FragmentList? = null
     private val viewModel: MainViewModel = MainViewModel()
     private lateinit var adapter: adapterTeams
+
 
 
 
@@ -49,10 +50,10 @@ class FragmentList : Fragment() {
     }
 
     private fun getEquipos() {
-        viewModel.getTeams().observe(viewLifecycleOwner, Observer { it ->
+        viewModel.getEquipos().observe(viewLifecycleOwner, Observer { it ->
             it?.let{
                 adapter.setEquipos(it)
-                teams = it
+                equipos = it
 
             }
         })
@@ -64,5 +65,6 @@ class FragmentList : Fragment() {
         rvTeams2.layoutManager = LinearLayoutManager(requireContext())
 
     }
+
 
 }

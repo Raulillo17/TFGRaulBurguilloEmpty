@@ -12,13 +12,13 @@ class MainViewModel : ViewModel(){
 
     private var repository: MainRepository = MainRepository()
 
-    fun getTeams(): MutableLiveData<List<Team>> {
+    fun getEquipos(): MutableLiveData<List<Team>> {
         val teams = MutableLiveData<List<Team>>()
 
-
         GlobalScope.launch(Dispatchers.Main) {
-            teams.value = repository.getTeams()
+            teams.value = repository.getEquipos()
         }
         return teams
     }
+
 }

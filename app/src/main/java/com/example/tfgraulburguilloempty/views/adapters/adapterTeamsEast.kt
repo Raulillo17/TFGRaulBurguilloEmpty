@@ -9,13 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.model.Team
-import com.squareup.picasso.Picasso
 
 
-class adapterTeams(
+class adapterTeamsEast(
     val context: Context,
     val layout: Int
-) : RecyclerView.Adapter<adapterTeams.ViewHolder>() {
+) : RecyclerView.Adapter<adapterTeamsEast.ViewHolder>() {
 
     private var dataList: List<Team> = emptyList()
 
@@ -49,17 +48,12 @@ class adapterTeams(
             // al que hay que poner los datos del objeto dataItem
             val ivteams = itemView.findViewById(R.id.ivteams) as ImageView
             val tvnombrecategoria = itemView.findViewById(R.id.tvnombreteam) as TextView
-            val tvRecord = itemView.findViewById(R.id.tvRecord) as TextView
 
 
-            Picasso.get().load("${dataItem.teamLogoURL}").into(ivteams)
-            tvnombrecategoria.text = dataItem.name
-            tvRecord.text = dataItem.record
-
-                //val id = context.resources.getIdentifier("default_img" , "drawable", context.packageName)
-                //ivteams.setImageResource(id)
-                //tvnombrecategoria.text = "Texto predeterminado"
-                // Si el valor es nulo, ocultamos el CardView
+            //val id = context.resources.getIdentifier("default_img" , "drawable", context.packageName)
+            //ivteams.setImageResource(id)
+            //tvnombrecategoria.text = "Texto predeterminado"
+            // Si el valor es nulo, ocultamos el CardView
 
             itemView.tag = dataItem
 
