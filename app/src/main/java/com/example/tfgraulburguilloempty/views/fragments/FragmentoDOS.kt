@@ -9,16 +9,19 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
+import com.example.tfgraulburguilloempty.views.adapters.adapterPlayers
 import com.example.tfgraulburguilloempty.views.adapters.adapterTeams
+import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
 
 
 class FragmentoDOS : Fragment() {
+    private lateinit var jugadores: List<Player>
     private val viewModel: MainViewModel = MainViewModel()
-    private lateinit var adapter: adapterTeams
-    private lateinit var equipos: List<Team>
-    private lateinit var rvTeamsEast: RecyclerView
+    private lateinit var adapter: adapterPlayers
+
+    private lateinit var rvPlayers2: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,26 +33,27 @@ class FragmentoDOS : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getEquipos()
+        getJugadores()
         initRV()
     }
-    private fun getEquipos() {
-        viewModel.getEquipos().observe(viewLifecycleOwner, Observer { it ->
+
+    private fun getJugadores() {
+        viewModel.getJugadores().observe(viewLifecycleOwner, Observer { it ->
             it?.let{
-                adapter.setEquipos(it)
-                equipos = it
+                adapter.setJugadores(it)
+                jugadores = it
 
             }
         })
     }
-
     fun initRV() {
-        rvTeamsEast  = requireView().findViewById<RecyclerView>(R.id.rvTeamsEast)
-        adapter = adapterTeams(requireContext(),R.layout.rowteams)
-        rvTeamsEast.adapter = adapter
-        rvTeamsEast.layoutManager = LinearLayoutManager(requireContext())
+        rvPlayers2  = requireView().findViewById<RecyclerView>(R.id.rvPlayers2)
+        adapter = adapterPlayers(requireContext(),R.layout.rowteams)
+        rvPlayers2.adapter = adapter
+        rvPlayers2.layoutManager = LinearLayoutManager(requireContext())
 
     }
+
 
 
 

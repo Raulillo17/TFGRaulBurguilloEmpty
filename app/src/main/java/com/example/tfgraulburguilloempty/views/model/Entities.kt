@@ -11,10 +11,7 @@ data class Team (
     val record: String,
     @SerializedName("teamLogoUrl")
     val teamLogoURL: String,
-
-    val dateLastUpdated: String
 ) : Serializable
-
 
 
 data class Player (

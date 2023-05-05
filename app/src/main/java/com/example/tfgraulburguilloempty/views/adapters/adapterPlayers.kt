@@ -31,8 +31,8 @@ class adapterPlayers(
         return dataList.size
     }
 
-    internal fun setEquipos(equipos: List<Player>) {
-        this.dataList = equipos
+    internal fun setJugadores(jugadores: List<Player>) {
+        this.dataList = jugadores
         notifyDataSetChanged()
     }
 
@@ -51,11 +51,6 @@ class adapterPlayers(
             tvNombrePlayer.text = dataItem.team
             tvPosicionarellenar.text = dataItem.position.toString()
             tvEdadaRellenar.text = dataItem.age
-
-
-
-
-
 
             //val id = context.resources.getIdentifier("default_img" , "drawable", context.packageName)
             //ivteams.setImageResource(id)

@@ -50,11 +50,13 @@ class adapterTeams(
             val ivteams = itemView.findViewById(R.id.ivteams) as ImageView
             val tvnombrecategoria = itemView.findViewById(R.id.tvnombreteam) as TextView
             val tvRecord = itemView.findViewById(R.id.tvRecord) as TextView
+            val tvConferencia = itemView.findViewById(R.id.tvConferencia) as TextView
 
 
             Picasso.get().load("${dataItem.teamLogoURL}").into(ivteams)
             tvnombrecategoria.text = dataItem.name
             tvRecord.text = dataItem.record
+            tvConferencia.text = dataItem.conference.toString()
 
                 //val id = context.resources.getIdentifier("default_img" , "drawable", context.packageName)
                 //ivteams.setImageResource(id)
