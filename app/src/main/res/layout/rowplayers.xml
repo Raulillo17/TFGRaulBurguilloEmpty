@@ -23,14 +23,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvEdad"
-            card_view:layout_constraintVertical_bias="0.705"
-            tools:layout_editor_absoluteX="295dp" />
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.933"
+            card_view:layout_constraintStart_toEndOf="@+id/ivPlayer"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:text="Edad" />
 
         <TextView
             android:id="@+id/tvNombrePlayer"
-            android:layout_width="109dp"
-            android:layout_height="20dp"
+            android:layout_width="82dp"
+            android:layout_height="19dp"
             android:layout_marginTop="4dp"
             android:text="TextView"
             android:textAlignment="center"
@@ -46,10 +48,10 @@
             android:text="Posicion:"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.075"
+            card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toEndOf="@+id/ivPlayer"
             card_view:layout_constraintTop_toBottomOf="@+id/tvNombrePlayer"
-            card_view:layout_constraintVertical_bias="0.255" />
+            card_view:layout_constraintVertical_bias="0.234" />
 
         <ImageView
             android:id="@+id/ivPlayer"
@@ -66,17 +68,18 @@
             android:id="@+id/tvEdad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="Edad:"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.758"
+            card_view:layout_constraintHorizontal_bias="0.618"
             card_view:layout_constraintStart_toEndOf="@+id/tvPosicion"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintVertical_bias="0.507" />
 
         <TextView
             android:id="@+id/tvPosicionarellenar"
-            android:layout_width="90dp"
-            android:layout_height="19dp"
+            android:layout_width="104dp"
+            android:layout_height="20dp"
             android:text="TextView"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toStartOf="@+id/tvEdad"
@@ -84,6 +87,15 @@
             card_view:layout_constraintStart_toEndOf="@+id/tvPosicion"
             card_view:layout_constraintTop_toBottomOf="@+id/tvNombrePlayer"
             card_view:layout_constraintVertical_bias="0.255" />
+
+        <TextView
+            android:id="@+id/tvLastName"
+            android:layout_width="91dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:text="TextView"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

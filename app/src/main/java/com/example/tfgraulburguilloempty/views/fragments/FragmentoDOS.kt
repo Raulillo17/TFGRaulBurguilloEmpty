@@ -48,7 +48,7 @@ class FragmentoDOS : Fragment() {
     }
     fun initRV() {
         rvPlayers2  = requireView().findViewById<RecyclerView>(R.id.rvPlayers2)
-        adapter = adapterPlayers(requireContext(),R.layout.rowteams)
+        adapter = adapterPlayers(requireContext(),R.layout.rowplayers)
         rvPlayers2.adapter = adapter
         rvPlayers2.layoutManager = LinearLayoutManager(requireContext())
 

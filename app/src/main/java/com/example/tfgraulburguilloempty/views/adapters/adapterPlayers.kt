@@ -4,10 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.model.Player
+import com.squareup.picasso.Picasso
 
 class adapterPlayers(
     val context: Context,
@@ -47,10 +49,26 @@ class adapterPlayers(
             val tvNombrePlayer = itemView.findViewById(R.id.tvNombrePlayer) as TextView
             val tvPosicionarellenar = itemView.findViewById(R.id.tvPosicionarellenar) as TextView
             val tvEdadaRellenar = itemView.findViewById(R.id.tvEdadaRellenar) as TextView
+            val tvLastName = itemView.findViewById(R.id.tvLastName) as TextView
+            val ivPlayer = itemView.findViewById(R.id.ivPlayer) as ImageView
 
-            tvNombrePlayer.text = dataItem.team
-            tvPosicionarellenar.text = dataItem.position.toString()
-            tvEdadaRellenar.text = dataItem.age
+
+            if (dataItem.team == null ){
+                View.GONE
+            } else if (dataItem.headShotURL == null) {
+                val id =
+                    context.resources.getIdentifier("default_img", "drawable", context.packageName)
+                ivPlayer.setImageResource(id)
+            }
+            else if (dataItem.headShotURL != null){
+                tvNombrePlayer.text = dataItem.firstName
+                tvPosicionarellenar.text = dataItem.position.toString()
+                tvEdadaRellenar.text = dataItem.age
+                tvLastName.text = dataItem.lastName
+                Picasso.get().load("${dataItem.headShotURL}").into(ivPlayer)
+            }
+
+
 
             //val id = context.resources.getIdentifier("default_img" , "drawable", context.packageName)
             //ivteams.setImageResource(id)
