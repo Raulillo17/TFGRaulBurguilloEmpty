@@ -1,11 +1,13 @@
 package com.example.tfgraulburguilloempty.views.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.model.Team
@@ -57,6 +59,8 @@ class adapterTeams(
             tvnombrecategoria.text = dataItem.name
             tvRecord.text = dataItem.record
             tvConferencia.text = dataItem.conference.toString()
+
+
 
                 //val id = context.resources.getIdentifier("default_img" , "drawable", context.packageName)
                 //ivteams.setImageResource(id)

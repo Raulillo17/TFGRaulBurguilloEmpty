@@ -27,14 +27,14 @@ class MainRepository {
         return emptyList()
     }
 
-        suspend fun getPlayersByTeam(name: String): List<Team> {
+        suspend fun getPlayersByTeam(name: String): List<Player> {
             val webResponse = service.getPlayersByTeam(name).await()
             if (webResponse.isSuccessful) {
                 return webResponse.body()!!
             }
             return emptyList()
         }
-        }
+}
 
 
 

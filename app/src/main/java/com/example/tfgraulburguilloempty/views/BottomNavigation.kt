@@ -1,17 +1,19 @@
 package com.example.tfgraulburguilloempty.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.tfgraulburguilloempty.R
-import com.example.tfgraulburguilloempty.views.fragments.FragmentList
-import com.example.tfgraulburguilloempty.views.fragments.FragmentoDOS
-import com.example.tfgraulburguilloempty.views.fragments.FragmentoTRES
+import com.example.tfgraulburguilloempty.views.fragments.*
+import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -19,10 +21,14 @@ import com.google.firebase.auth.FirebaseAuth
 class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
 
-        private lateinit var nav_view: BottomNavigationView
+    private lateinit var provideapasar: String
+    private lateinit var emailapasar: String
+    private lateinit var nav_view: BottomNavigationView
         private lateinit var binding: BottomNavigationView
 
 
+
+        @SuppressLint("MissingInflatedId")
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
 
@@ -33,10 +39,16 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
             nav_view  = findViewById(R.id.nav_view)
             nav_view.setOnNavigationItemSelectedListener(this)
             setInitialFragment()
-
             val bundle = intent.extras
             val email = bundle?.getString("email")
             val provider = bundle?.getString("provider")
+
+
+            if (email != null && provider != null) {
+                emailapasar = email
+                provideapasar = provider
+            }
+
             title = "Equipos"
 
             //guardado de datos
@@ -44,6 +56,9 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
             prefs.putString("email", email)
             prefs.putString("provider", provider)
             prefs.apply()
+
+
+
 
 
         }
@@ -85,7 +100,19 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
                     fragment = FragmentoDOS()
                 }
                 R.id.navigation_tres -> {
+
                     fragment = FragmentoTRES()
+
+                }
+                R.id.action_logout -> {
+                    val emailTextView: TextView? = findViewById(R.id.tvEmailDetail)
+                    val providerTextView: TextView? = findViewById(R.id.tvProviderDeatil)
+                    if (emailTextView != null && providerTextView != null) {
+                        emailTextView.text = emailapasar
+                        providerTextView.text = provideapasar
+                    }
+                    fragment = FragmentLogOut()
+
                 }
             }
             replaceFragment(fragment!!)
@@ -103,11 +130,31 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
         fragmentTransaction.commit()
     }
 
-    fun onClickTeam(v: View){
+    public fun onClickTeam(v: View){
         val equipo = v.tag as Team
         val intent = Intent(this, PlayersActivity::class.java)
         intent.putExtra("equipo", equipo)
         startActivity(intent)
+
+    }
+
+    /*fun onClickPlayer(v: View){
+        val jugador = v.tag as Player
+        val equipo = v.tag as Team
+        val intent = Intent(this, PlayersDetailActivity::class.java)
+        intent.putExtra("jugador", jugador)
+        intent.putExtra("equipo", equipo)
+        startActivity(intent)
+
+    }*/
+
+    fun onClickLogOut(v: View){
+        //borrado de datos
+        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+        prefs.clear()
+        prefs.apply()
+        FirebaseAuth.getInstance().signOut()
+        onBackPressed()
 
     }
 

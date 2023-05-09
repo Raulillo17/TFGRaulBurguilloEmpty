@@ -1,22 +1,20 @@
 package com.example.tfgraulburguilloempty.views.adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.model.Player
 import com.squareup.picasso.Picasso
 
-class adapterPlayers(
+class adapterPlayerPerTeam(
     val context: Context,
     val layout: Int
-) : RecyclerView.Adapter<adapterPlayers.ViewHolder>() {
+) : RecyclerView.Adapter<adapterPlayerPerTeam.ViewHolder>() {
 
     private var dataList: List<Player> = emptyList()
 
@@ -35,7 +33,7 @@ class adapterPlayers(
         return dataList.size
     }
 
-    internal fun setJugadores(jugadores: List<Player>) {
+    internal fun setJugadoresPorEquipo(jugadores: List<Player>) {
         this.dataList = jugadores
         notifyDataSetChanged()
     }

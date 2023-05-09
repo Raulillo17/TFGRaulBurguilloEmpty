@@ -11,9 +11,41 @@
     <color name="colorPrimaryDark">#2C384A</color>
     <color name="transparent">#00FFFFFF</color>
 
-
     <color name="green_dark">#062925</color>
     <color name="green_normal">#044a42</color>
     <color name="green_ligth">#3a9188</color>
     <color name="green_light_2">#b8e1dd</color>
+    <color name="Memphis">#0D2B56</color>
+    <color name="Boston">#007A33</color>
+    <color name="Oklahoma">#007AC1</color>
+    <color name="Denver">#0E2240</color>
+    <color name="Clippers">#1D428A</color>
+    <color name="Dallas">#00538C</color>
+    <color name="Miami">#98002E</color>
+    <color name="Cleveland">#6F263D</color>
+    <color name="Rockets">#CE1141</color>
+    <color name="Orlando">#0077C0</color>
+    <color name="Pacers">#002D62</color>
+    <color name="Sacramento">#5A2D81</color>
+    <color name="Bucks">#00471B</color>
+    <color name="Bulls">#CE1141</color>
+    <color name="Wizards">#E31837</color>
+    <color name="Nets">#000000</color>
+    <color name="Atlanta">#E03A3E</color>
+    <color name="Warriors">#CE1141</color>
+    <color name="Lakers">#552583</color>
+    <color name="Nicks">#F58426</color>
+    <color name="Raptors">#CE1141</color>
+    <color name="Phipadelphia">#ED174C</color>
+    <color name="Suns">#1D1160</color>
+    <color name="Orleans">#0C2340</color>
+    <color name="Jazz">#002B5C</color>
+    <color name="Detroit">#C8102E</color>
+    <color name="Portland"> #E03A3E</color>
+    <color name="Minesota">#0C2340</color>
+    <color name="Hornets">#00778B</color>
+    <color name="Spurs">#C4CED4</color>
+
+
+
 </resources>

@@ -5,6 +5,7 @@ import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Respuesta
 import com.example.tfgraulburguilloempty.views.model.Team
 import kotlinx.coroutines.Deferred
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -18,7 +19,12 @@ interface BasketService {
     fun getJugadores(): Deferred<Response<List<Player>>>
 
 
+    //@GET("players/team")
+    //fun getPlayersByTeam(@Query("name") name: String): Deferred<Response<List<Team>>>
+
     @GET("players/team")
-    fun getPlayersByTeam(@Query("name") name: String): Deferred<Response<List<Team>>>
+    fun getPlayersByTeam(@Query("name") teamName: String): Deferred<Response<List<Player>>>
+    @GET("categoria/{idcategoria}/chistes")
+    fun getChistesByCategoria(@Path("idcategoria") idcategoria: String): Deferred<Response<Respuesta>>
 
 }

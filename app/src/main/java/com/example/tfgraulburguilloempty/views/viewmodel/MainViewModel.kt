@@ -23,21 +23,21 @@ class MainViewModel : ViewModel(){
     }
 
     fun getJugadores(): MutableLiveData<List<Player>> {
-        val teams = MutableLiveData<List<Player>>()
+        val players = MutableLiveData<List<Player>>()
 
         GlobalScope.launch(Dispatchers.Main) {
-            teams.value = repository.getJugadores()
+            players.value = repository.getJugadores()
         }
-        return teams
+        return players
     }
 
-    fun getPlayersByTeam(name:String): MutableLiveData<List<Team>> {
-        val teams = MutableLiveData<List<Team>>()
+    fun getPlayersByTeam(name:String): MutableLiveData<List<Player>> {
+        val playersperteam = MutableLiveData<List<Player>>()
 
         GlobalScope.launch(Dispatchers.Main) {
-            teams.value = repository.getPlayersByTeam(name)
+            playersperteam.value = repository.getPlayersByTeam(name)
         }
-        return teams
+        return playersperteam
     }
 
     }
