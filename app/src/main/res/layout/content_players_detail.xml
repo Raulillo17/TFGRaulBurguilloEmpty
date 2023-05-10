@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C1C1C1"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <ImageView
@@ -88,6 +89,7 @@
         android:layout_marginStart="43dp"
         android:layout_marginTop="61dp"
         android:text="Posicion:"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPuntosDetail" />
 
@@ -98,6 +100,7 @@
         android:layout_marginStart="43dp"
         android:layout_marginTop="21dp"
         android:text="Nacido el:"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -108,6 +111,8 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="21dp"
         android:text="Altura:"
+        android:textAlignment="viewStart"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -118,6 +123,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="16dp"
         android:text="Peso:"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -128,6 +134,7 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="57dp"
         android:text="Porcentaje T3:"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/tvPosicionDetail"
         app:layout_constraintTop_toBottomOf="@+id/tvRebotesDetail" />
 
@@ -138,6 +145,7 @@
         android:layout_marginStart="9dp"
         android:layout_marginTop="23dp"
         android:text="Porcentaje T2:"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/tvCumpleaños"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -148,6 +156,7 @@
         android:layout_marginStart="9dp"
         android:layout_marginTop="23dp"
         android:text="Porcentaje T1:"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/tvAltura"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 

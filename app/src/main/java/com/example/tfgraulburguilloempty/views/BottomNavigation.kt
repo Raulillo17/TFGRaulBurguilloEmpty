@@ -105,13 +105,15 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
 
                 }
                 R.id.action_logout -> {
-                    val emailTextView: TextView? = findViewById(R.id.tvEmailDetail)
+                    /*val emailTextView: TextView? = findViewById(R.id.tvEmailDetail)
                     val providerTextView: TextView? = findViewById(R.id.tvProviderDeatil)
                     if (emailTextView != null && providerTextView != null) {
                         emailTextView.text = emailapasar
                         providerTextView.text = provideapasar
-                    }
+                    }*/
+                    //fragment.arguments
                     fragment = FragmentLogOut()
+
 
                 }
             }

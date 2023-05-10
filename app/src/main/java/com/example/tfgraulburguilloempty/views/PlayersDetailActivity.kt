@@ -79,7 +79,10 @@ class PlayersDetailActivity : AppCompatActivity() {
         tvPosicionDetail.text = jugador.position.toString()
         tvPeso.text = jugador.weight
         tvAltura.text = jugador.height.toString()
-        Picasso.get().load("${jugador.headShotURL}")
+        tvPorP3.text = jugador.careerPercentageThree.toString()
+        tvPorT2.text = jugador.careerPercentageFieldGoal.toString()
+        tvPorT1.text = jugador.careerPercentageFreethrow.toString()
+        Picasso.get().load("${jugador.headShotURL}").into(ivPlayerDetail)
 
     }
 
