@@ -1,11 +1,13 @@
 package com.example.tfgraulburguilloempty.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.helper.widget.MotionEffect.TAG
@@ -22,6 +24,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import java.io.File
 
 class AuthActivity : AppCompatActivity(){
     private lateinit var googlebutton: Button
@@ -155,10 +158,13 @@ class AuthActivity : AppCompatActivity(){
 
         }
     }
+
     private fun addData() {
         val user: MutableMap<String, String> = HashMap() // diccionario key value
+        val defaultImage = R.drawable.default_img
         user["email"] = EmaileditText.text.toString()
         user["password"] = PasswordeditText.text.toString()
+        user["foto"] = defaultImage.toString()
         db.collection("users")
             .add(user)
             .addOnSuccessListener(OnSuccessListener<DocumentReference> { documentReference ->

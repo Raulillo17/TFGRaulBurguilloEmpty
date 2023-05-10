@@ -74,6 +74,9 @@ class PlayersDetailActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
             msg("Has añadido a ${jugador.firstName} a favoritos" )
+
+
+
         }
     }
 
