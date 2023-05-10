@@ -4,8 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C1C1C1"
+    android:background="#858282"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:id="@+id/llDetail"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginBottom="54dp"
+        android:background="#0C0C0C"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
     <ImageView
         android:id="@+id/ivPlayerDetail"
@@ -25,6 +37,7 @@
         android:layout_marginTop="253dp"
         android:text="PPG"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,6 +50,7 @@
         android:layout_marginEnd="58dp"
         android:text="APG"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/tvRebotes"
         app:layout_constraintStart_toEndOf="@+id/tvPuntos"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -49,6 +63,7 @@
         android:layout_marginEnd="56dp"
         android:text="RPG"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPlayerDetail" />
 
@@ -59,6 +74,7 @@
         android:layout_marginStart="76dp"
         android:layout_marginTop="36dp"
         android:text="TextView"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPuntos" />
 
@@ -66,8 +82,10 @@
         android:id="@+id/tvAsistenciasDetail"
         android:layout_width="58dp"
         android:layout_height="39dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="30dp"
         android:text="TextView"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/llDetail"
         app:layout_constraintEnd_toStartOf="@+id/tvRebotesDetail"
         app:layout_constraintStart_toEndOf="@+id/tvPuntosDetail"
         app:layout_constraintTop_toBottomOf="@+id/tvAsistencias" />
@@ -79,8 +97,10 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="40dp"
         android:text="TextView"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRebotes" />
+
 
     <TextView
         android:id="@+id/textView5"
@@ -166,6 +186,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="Jersey:"
+        android:textColor="@color/design_default_color_background"
         app:layout_constraintEnd_toStartOf="@+id/tvJersey"
         app:layout_constraintHorizontal_bias="0.885"
         app:layout_constraintStart_toStartOf="parent"
@@ -178,6 +199,7 @@
         android:layout_marginTop="14dp"
         android:layout_marginEnd="140dp"
         android:text="TextView"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPlayerDetail" />
 

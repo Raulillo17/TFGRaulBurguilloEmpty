@@ -46,7 +46,7 @@ class adapterPlayerPerTeam(
 
             // itemview es el item de diseño
             // al que hay que poner los datos del objeto dataItem
-            val tvNombrePlayer = itemView.findViewById(R.id.tvNombrePlayer) as TextView
+            val tvNombrePlayer = itemView.findViewById(R.id.tvNombreJugador) as TextView
             val tvPosicionarellenar = itemView.findViewById(R.id.tvPosicionarellenar) as TextView
             val tvEdadaRellenar = itemView.findViewById(R.id.tvEdadaRellenar) as TextView
             val tvLastName = itemView.findViewById(R.id.tvLastName) as TextView

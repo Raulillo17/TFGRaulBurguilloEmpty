@@ -1,6 +1,10 @@
 package com.example.tfgraulburguilloempty.views
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.Layout
+import android.view.View
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
@@ -17,6 +21,8 @@ import com.squareup.picasso.Picasso
 
 class PlayersDetailActivity : AppCompatActivity() {
 
+    private lateinit var nombredelEquipo: String
+    private lateinit var colorFondo: View
     private lateinit var ivPlayerDetail: ImageView
     private lateinit var equipo: Team
     private lateinit var jugador: Player
@@ -55,11 +61,12 @@ class PlayersDetailActivity : AppCompatActivity() {
         tvPorT2 = findViewById<TextView>(R.id.tvPorT2)
         tvPorT1 = findViewById<TextView>(R.id.tvPorT1)
         ivPlayerDetail = findViewById<ImageView>(R.id.ivPlayerDetail)
+        colorFondo = findViewById<View>(R.id.llDetail)
 
         jugador = intent.getSerializableExtra("jugador") as Player
         equipo = intent.getSerializableExtra("equipo") as Team
 
-        title = "${jugador.firstName + "  " + equipo.name}"
+        title = "${jugador.firstName + "  " + jugador.team}"
 
         showDetail()
 
@@ -70,6 +77,7 @@ class PlayersDetailActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun showDetail() {
         tvJersey.text = jugador.jerseyNumber
         tvPuntosDetail.text = jugador.careerPoints.toString()
@@ -83,8 +91,49 @@ class PlayersDetailActivity : AppCompatActivity() {
         tvPorT2.text = jugador.careerPercentageFieldGoal.toString()
         tvPorT1.text = jugador.careerPercentageFreethrow.toString()
         Picasso.get().load("${jugador.headShotURL}").into(ivPlayerDetail)
+        colorFondo.background = colorFondo(jugador.team)
+
+        //jugador.team?.let { colorFondo(it) }
 
     }
+
+    @SuppressLint("ResourceAsColor")
+    private fun colorFondo(name: String?): Drawable? {
+        when (name) {
+            "Orlando Magic" -> colorFondo.setBackgroundColor(R.color.Orlando)
+            "Atlanta Hawks" -> colorFondo.setBackgroundColor(R.color.Atlanta)
+            "Boston Celtics" -> colorFondo.setBackgroundColor(R.color.Boston)
+            "Milwaukee Bucks" -> colorFondo.setBackgroundColor(R.color.Bucks)
+            "Chicago Bulls" -> colorFondo.setBackgroundColor(R.color.Bulls)
+            "Cleveland Cavaliers" -> colorFondo.setBackgroundColor(R.color.Cleveland)
+            "LA Clippers" -> colorFondo.setBackgroundColor(R.color.Clippers)
+            "New York Knicks" -> colorFondo.setBackgroundColor(R.color.Nicks)
+            "Dallas Mavericks" -> colorFondo.setBackgroundColor(R.color.Dallas)
+            "Denver Nuggets" -> colorFondo.setBackgroundColor(R.color.Denver)
+            "Detroit Pistons" -> colorFondo.setBackgroundColor(R.color.Detroit)
+            "Indiana Pacers" -> colorFondo.setBackgroundColor(R.color.Pacers)
+            "Philadelphia 76ers" -> colorFondo.setBackgroundColor(R.color.Phipadelphia)
+            "Memphis Grizzlies" -> colorFondo.setBackgroundColor(R.color.Memphis)
+            "Miami Heat" -> colorFondo.setBackgroundColor(R.color.Miami)
+            "Minnesota Timberwolves" -> colorFondo.setBackgroundColor(R.color.Minesota)
+            "Toronto Raptors" -> colorFondo.setBackgroundColor(R.color.Raptors)
+            "Houston Rockets" -> colorFondo.setBackgroundColor(R.color.Rockets)
+            "Golden State Warriors" -> colorFondo.setBackgroundColor(R.color.Warriors)
+            "Washington Wizards" -> colorFondo.setBackgroundColor(R.color.Wizards)
+            "Charlotte Hornets" -> colorFondo.setBackgroundColor(R.color.Hornets)
+            "Utah Jazz" -> colorFondo.setBackgroundColor(R.color.Jazz)
+            "Brooklyn Nets" -> colorFondo.setBackgroundColor(R.color.Nets)
+            "Oklahoma City Thunder" -> colorFondo.setBackgroundColor(R.color.Oklahoma)
+            "New Orleans Pelicans" -> colorFondo.setBackgroundColor(R.color.Orleans)
+            "Portland Trail Blazers" -> colorFondo.setBackgroundColor(R.color.Portland)
+            "Los Angeles Lakers" -> colorFondo.setBackgroundColor(R.color.Lakers)
+            "Sacramento Kings" -> colorFondo.setBackgroundColor(R.color.Sacramento)
+            "Phoenix Suns" -> colorFondo.setBackgroundColor(R.color.Suns)
+            "San Antonio Spurs" -> colorFondo.setBackgroundColor(R.color.Spurs)
+        }
+        return null
+    }
+
 
 
     private fun msg(msg: String) {
