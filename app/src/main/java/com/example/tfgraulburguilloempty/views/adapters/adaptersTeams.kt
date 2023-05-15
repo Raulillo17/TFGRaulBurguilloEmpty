@@ -68,7 +68,7 @@ class adapterTeams(
             tvnombrecategoria.text = dataItem.name
             tvRecord.text = dataItem.record
             tvConferencia.text = dataItem.conference.toString()*/
-            when(dataItem.name){
+/*            when(dataItem.name){
                 "Orlando Magic" -> (itemView as LinearLayout).setBackgroundColor(R.color.Orlando)
                 "Atlanta Hawks" -> (itemView as LinearLayout).setBackgroundColor(R.color.Atlanta)
                 "Boston Celtics" -> (itemView as LinearLayout).setBackgroundColor(R.color.Boston)
@@ -100,7 +100,7 @@ class adapterTeams(
                 "Phoenix Suns" -> (itemView as LinearLayout).setBackgroundColor(R.color.Suns)
                 "San Antonio Spurs" -> (itemView as LinearLayout).setBackgroundColor(R.color.Spurs)
 
-            }
+            }*/
 
 
 
