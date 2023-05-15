@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.squareup.picasso.Picasso
+import org.w3c.dom.Text
 
 
 class adapterTeams(
@@ -51,47 +53,52 @@ class adapterTeams(
 
             // itemview es el item de diseño
             // al que hay que poner los datos del objeto dataItem
-            val ivteams = itemView.findViewById(R.id.ivteams) as ImageView
+            /*val ivteams = itemView.findViewById(R.id.ivteams) as ImageView
             val tvnombrecategoria = itemView.findViewById(R.id.tvnombreteam) as TextView
             val tvRecord = itemView.findViewById(R.id.tvRecord) as TextView
-            val tvConferencia = itemView.findViewById(R.id.tvConferencia) as TextView
+            val tvConferencia = itemView.findViewById(R.id.tvConferencia) as TextView*/
+            val ivEquipo = itemView.findViewById(R.id.ivEquipo) as ImageView
+            val tvEquipo = itemView.findViewById(R.id.tvEquipo) as TextView
 
 
-            Picasso.get().load("${dataItem.teamLogoURL}").into(ivteams)
+
+            Picasso.get().load("${dataItem.teamLogoURL}").into(ivEquipo)
+            tvEquipo.text = dataItem.name
+           /* Picasso.get().load("${dataItem.teamLogoURL}").into(ivteams)
             tvnombrecategoria.text = dataItem.name
             tvRecord.text = dataItem.record
-            tvConferencia.text = dataItem.conference.toString()
+            tvConferencia.text = dataItem.conference.toString()*/
             when(dataItem.name){
-                "Orlando Magic" -> (itemView as CardView).setCardBackgroundColor(R.color.Orlando)
-                "Atlanta Hawks" -> (itemView as CardView).setCardBackgroundColor(R.color.Atlanta)
-                "Boston Celtics" -> (itemView as CardView).setCardBackgroundColor(R.color.Boston)
-                "Milwaukee Bucks" -> (itemView as CardView).setCardBackgroundColor(R.color.Bucks)
-                "Chicago Bulls" -> (itemView as CardView).setCardBackgroundColor(R.color.Bulls)
-                "Cleveland Cavaliers" -> (itemView as CardView).setCardBackgroundColor(R.color.Cleveland)
-                "LA Clippers" -> (itemView as CardView).setCardBackgroundColor(R.color.Clippers)
-                "New York Knicks" -> (itemView as CardView).setCardBackgroundColor(R.color.Nicks)
-                "Dallas Mavericks" -> (itemView as CardView).setCardBackgroundColor(R.color.Dallas)
-                "Denver Nuggets" -> (itemView as CardView).setCardBackgroundColor(R.color.Denver)
-                "Detroit Pistons" -> (itemView as CardView).setCardBackgroundColor(R.color.Detroit)
-                "Indiana Pacers" -> (itemView as CardView).setCardBackgroundColor(R.color.Pacers)
-                "Philadelphia 76ers" -> (itemView as CardView).setCardBackgroundColor(R.color.Phipadelphia)
-                "Memphis Grizzlies" -> (itemView as CardView).setCardBackgroundColor(R.color.Memphis)
-                "Miami Heat" -> (itemView as CardView).setCardBackgroundColor(R.color.Miami)
-                "Minnesota Timberwolves" -> (itemView as CardView).setCardBackgroundColor(R.color.Minesota)
-                "Toronto Raptors" -> (itemView as CardView).setCardBackgroundColor(R.color.Raptors)
-                "Houston Rockets" -> (itemView as CardView).setCardBackgroundColor(R.color.Rockets)
-                "Golden State Warriors" -> (itemView as CardView).setCardBackgroundColor(R.color.Warriors)
-                "Washington Wizards" -> (itemView as CardView).setCardBackgroundColor(R.color.Wizards)
-                "Charlotte Hornets" -> (itemView as CardView).setCardBackgroundColor(R.color.Hornets)
-                "Utah Jazz" -> (itemView as CardView).setCardBackgroundColor(R.color.Jazz)
-                "Brooklyn Nets" -> (itemView as CardView).setCardBackgroundColor(R.color.Nets)
-                "Oklahoma City Thunder" -> (itemView as CardView).setCardBackgroundColor(R.color.Oklahoma)
-                "New Orleans Pelicans" -> (itemView as CardView).setCardBackgroundColor(R.color.Orleans)
-                "Portland Trail Blazers" -> (itemView as CardView).setCardBackgroundColor(R.color.Portland)
-                "Los Angeles Lakers" -> (itemView as CardView).setCardBackgroundColor(R.color.Lakers)
-                "Sacramento Kings" -> (itemView as CardView).setCardBackgroundColor(R.color.Sacramento)
-                "Phoenix Suns" -> (itemView as CardView).setCardBackgroundColor(R.color.Suns)
-                "San Antonio Spurs" -> (itemView as CardView).setCardBackgroundColor(R.color.Spurs)
+                "Orlando Magic" -> (itemView as LinearLayout).setBackgroundColor(R.color.Orlando)
+                "Atlanta Hawks" -> (itemView as LinearLayout).setBackgroundColor(R.color.Atlanta)
+                "Boston Celtics" -> (itemView as LinearLayout).setBackgroundColor(R.color.Boston)
+                "Milwaukee Bucks" -> (itemView as LinearLayout).setBackgroundColor(R.color.Bucks)
+                "Chicago Bulls" -> (itemView as LinearLayout).setBackgroundColor(R.color.Bulls)
+                "Cleveland Cavaliers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Cleveland)
+                "LA Clippers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Clippers)
+                "New York Knicks" -> (itemView as LinearLayout).setBackgroundColor(R.color.Nicks)
+                "Dallas Mavericks" -> (itemView as LinearLayout).setBackgroundColor(R.color.Dallas)
+                "Denver Nuggets" -> (itemView as LinearLayout).setBackgroundColor(R.color.Denver)
+                "Detroit Pistons" -> (itemView as LinearLayout).setBackgroundColor(R.color.Detroit)
+                "Indiana Pacers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Pacers)
+                "Philadelphia 76ers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Phipadelphia)
+                "Memphis Grizzlies" -> (itemView as LinearLayout).setBackgroundColor(R.color.Memphis)
+                "Miami Heat" -> (itemView as LinearLayout).setBackgroundColor(R.color.Miami)
+                "Minnesota Timberwolves" -> (itemView as LinearLayout).setBackgroundColor(R.color.Minesota)
+                "Toronto Raptors" -> (itemView as LinearLayout).setBackgroundColor(R.color.Raptors)
+                "Houston Rockets" -> (itemView as LinearLayout).setBackgroundColor(R.color.Rockets)
+                "Golden State Warriors" -> (itemView as LinearLayout).setBackgroundColor(R.color.Warriors)
+                "Washington Wizards" -> (itemView as LinearLayout).setBackgroundColor(R.color.Wizards)
+                "Charlotte Hornets" -> (itemView as LinearLayout).setBackgroundColor(R.color.Hornets)
+                "Utah Jazz" -> (itemView as LinearLayout).setBackgroundColor(R.color.Jazz)
+                "Brooklyn Nets" -> (itemView as LinearLayout).setBackgroundColor(R.color.Nets)
+                "Oklahoma City Thunder" -> (itemView as LinearLayout).setBackgroundColor(R.color.Oklahoma)
+                "New Orleans Pelicans" -> (itemView as LinearLayout).setBackgroundColor(R.color.Orleans)
+                "Portland Trail Blazers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Portland)
+                "Los Angeles Lakers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Lakers)
+                "Sacramento Kings" -> (itemView as LinearLayout).setBackgroundColor(R.color.Sacramento)
+                "Phoenix Suns" -> (itemView as LinearLayout).setBackgroundColor(R.color.Suns)
+                "San Antonio Spurs" -> (itemView as LinearLayout).setBackgroundColor(R.color.Spurs)
 
             }
 

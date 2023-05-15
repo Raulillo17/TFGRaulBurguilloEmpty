@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
@@ -88,6 +89,7 @@ class TeamsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         //adapter = adapterTeams(this,R.layout.rowteams)
         rvteams.adapter = adapter
         rvteams.layoutManager = LinearLayoutManager(this)
+        //rvteams.layoutManager = GridLayoutManager(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

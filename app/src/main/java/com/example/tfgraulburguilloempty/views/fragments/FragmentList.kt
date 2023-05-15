@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
@@ -60,10 +62,17 @@ class FragmentList : Fragment() {
         })
     }
     fun initRV() {
-        rvTeams2  = requireView().findViewById<RecyclerView>(R.id.rvTeams2)
+/*      rvTeams2  = requireView().findViewById<RecyclerView>(R.id.rvTeams2)
         adapter = adapterTeams(requireContext(),R.layout.rowteams)
         rvTeams2.adapter = adapter
-        rvTeams2.layoutManager = LinearLayoutManager(requireContext())
+        rvTeams2.layoutManager = LinearLayoutManager(requireContext())*/
+
+        val rvTeams2 = requireView().findViewById<RecyclerView>(R.id.rvTeams2)
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
+        adapter = adapterTeams(requireContext(),R.layout.rowteamsescudo)
+        rvTeams2.adapter = adapter
+        rvTeams2.layoutManager = gridLayoutManager
+
 
     }
 
