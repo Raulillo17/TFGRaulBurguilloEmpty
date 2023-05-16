@@ -65,21 +65,23 @@ class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
         rvplayers.layoutManager = LinearLayoutManager(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(com.example.tfgraulburguilloempty.R.menu.menu_main, menu)
-        val searchItem = menu?.findItem(R.id.action_search)
- //       searchView = searchItem?.actionView as SearchView
- //       searchView.setQueryHint("Search...")
- //       searchView.setOnQueryTextListener(this)
+/*        val searchItem = menu.findItem(R.id.action_search)
+        searchView = searchItem.actionView as SearchView
+        searchView.setQueryHint("Search...")
+        searchView.setOnQueryTextListener(this)*/
         return true
     }
     override fun onQueryTextSubmit(query: String?): Boolean {
         return false
     }
 
-    override fun onQueryTextChange(newText: String?): Boolean {
-        TODO("Not yet implemented")
+    override fun onQueryTextChange(query: String?): Boolean {
+        val original = ArrayList<Player>(players)
+        adapter.setJugadoresPorEquipo(original.filter { jugador ->  jugador.firstName!!.contains(query.toString(), true) })
+        return false
     }
 
     fun onClickPlayer(v: View){

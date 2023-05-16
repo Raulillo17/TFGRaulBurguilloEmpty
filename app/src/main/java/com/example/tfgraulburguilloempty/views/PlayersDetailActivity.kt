@@ -4,18 +4,21 @@ import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Layout
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.helper.widget.MotionEffect.TAG
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.databinding.ActivityPlayersDetailBinding
 import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 
 
@@ -37,6 +40,9 @@ class PlayersDetailActivity : AppCompatActivity() {
     private lateinit var tvPorP3: TextView
     private lateinit var tvPorT2: TextView
     private lateinit var tvPorT1: TextView
+    val db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
+
+    val JugadoresFav = db.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityPlayersDetailBinding
@@ -73,7 +79,14 @@ class PlayersDetailActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-            msg("Has añadido a ${jugador.firstName} a favoritos" )
+            JugadoresFav.add(jugador)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "Jugador favorito añadido con ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error al añadir el jugador favorito", e)
+                }
+            msg("Has añadido a ${jugador.firstName} +  ${jugador.lastName} a favoritos" )
 
 
 

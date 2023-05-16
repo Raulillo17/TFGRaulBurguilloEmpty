@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.fragments.*
+import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -136,7 +137,7 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
 
     }
 
-    /*fun onClickPlayer(v: View){
+/*    fun onClickPlayer(v: View){
         val jugador = v.tag as Player
         val equipo = v.tag as Team
         val intent = Intent(this, PlayersDetailActivity::class.java)

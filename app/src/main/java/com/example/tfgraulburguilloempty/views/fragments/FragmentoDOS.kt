@@ -1,9 +1,10 @@
 package com.example.tfgraulburguilloempty.views.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +17,7 @@ import com.example.tfgraulburguilloempty.views.model.Team
 import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
 
 
-class FragmentoDOS : Fragment() {
+class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var jugadores: List<Player>
     private val viewModel: MainViewModel = MainViewModel()
     private lateinit var adapter: adapterPlayers
@@ -27,8 +28,11 @@ class FragmentoDOS : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_fragmento_d_o_s, container, false)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragmento_d_o_s, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,10 +58,30 @@ class FragmentoDOS : Fragment() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_search -> {
+                // Acción para el Item 1
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
 
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
 
-
+    override fun onQueryTextChange(query: String?): Boolean {
+        val original = ArrayList<Player>(jugadores)
+        adapter.setJugadores(original.filter { jugador ->  jugador.firstName!!.contains(query.toString(), true) })
+        return false
+    }
 
 
 }

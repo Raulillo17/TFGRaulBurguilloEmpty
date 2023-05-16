@@ -168,6 +168,7 @@ class AuthActivity : AppCompatActivity(){
         db.collection("users")
             .add(user)
             .addOnSuccessListener(OnSuccessListener<DocumentReference> { documentReference ->
+                val JugadoresFav = documentReference.collection("JugadoresFav")
                 Log.d(TAG,"DocumentSnapshot added with ID: " + documentReference.id)
             })
             .addOnFailureListener(OnFailureListener { e ->

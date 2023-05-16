@@ -1,7 +1,6 @@
 package com.example.tfgraulburguilloempty.views.fragments
 
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tfgraulburguilloempty.R
 import com.google.firebase.auth.FirebaseAuth
@@ -28,7 +26,7 @@ class FragmentLogOut : Fragment() {
 
 
     private val REQUEST_IMAGE_GET = 1
-    private lateinit var ivFotoUser: ImageView
+    private lateinit var ivUsuario: ImageView
     private lateinit var  emailTextView: TextView
     private lateinit var  providerTextView: TextView
     var db = FirebaseFirestore.getInstance()
@@ -55,8 +53,8 @@ class FragmentLogOut : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         emailTextView = view?.findViewById(R.id.tvEmailDetail)!!
         providerTextView = view?.findViewById(R.id.tvProviderDeatil)!!
-        ivFotoUser = view?.findViewById(R.id.imageView2)!!
-        ivFotoUser.setOnClickListener {
+        ivUsuario = view?.findViewById(R.id.ivUsuario)!!
+        ivUsuario.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             startActivityForResult(
@@ -66,7 +64,7 @@ class FragmentLogOut : Fragment() {
 
         }
 
-        /*db.collection("users").document(auth!!.currentUser?.email.toString())
+/*        db.collection("users").document(auth!!.currentUser?.email.toString())
             .get().addOnSuccessListener { it ->
                 if (it.exists()) {
                     if (it.contains("email")) {
@@ -79,7 +77,7 @@ class FragmentLogOut : Fragment() {
                         if (isAdded) {
                             Glide.with(requireContext())
                                 .load(it.get("foto").toString())
-                                .into(ivFotoUser)
+                                .into(ivUsuario)
                         }
                     }
                 }
@@ -104,7 +102,7 @@ class FragmentLogOut : Fragment() {
                         Glide.with(requireContext())
                             .load(uri.toString())
                             .placeholder(R.drawable.default_img) // Imagen de espera mientras se carga la imagen
-                            .into(ivFotoUser)
+                            .into(ivUsuario)
                     }
 
                 }.addOnFailureListener { exception ->
