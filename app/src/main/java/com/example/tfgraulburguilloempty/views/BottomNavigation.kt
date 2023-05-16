@@ -7,13 +7,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.fragments.*
-import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -34,7 +31,6 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
 
             setContentView(R.layout.activity_bottom_navigation)
             // Agrega la Toolbar como ActionBar
-
 
             nav_view  = findViewById(R.id.nav_view)
             nav_view.setOnNavigationItemSelectedListener(this)
