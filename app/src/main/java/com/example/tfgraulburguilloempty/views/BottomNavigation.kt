@@ -16,6 +16,10 @@ import com.example.tfgraulburguilloempty.views.model.Team
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
+enum class ProviderType{
+    BASIC,
+    GOOGLE
+}
 class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
 
@@ -129,7 +133,7 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
         fragmentTransaction.commit()
     }
 
-    public fun onClickTeam(v: View){
+    fun onClickTeam(v: View){
         val equipo = v.tag as Team
         val intent = Intent(this, PlayersActivity::class.java)
         intent.putExtra("equipo", equipo)

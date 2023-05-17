@@ -64,11 +64,11 @@ class FragmentList : Fragment() {
         rvTeams2.adapter = adapter
         rvTeams2.layoutManager = LinearLayoutManager(requireContext())*/
 
-        val rvTeams2 = requireView().findViewById<RecyclerView>(R.id.rvJugadorFav)
+        val rvEquipos = requireView().findViewById<RecyclerView>(R.id.rvEquipos)
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         adapter = adapterTeams(requireContext(),R.layout.rowteamsescudo)
-        rvTeams2.adapter = adapter
-        rvTeams2.layoutManager = gridLayoutManager
+        rvEquipos.adapter = adapter
+        rvEquipos.layoutManager = gridLayoutManager
 
 
     }

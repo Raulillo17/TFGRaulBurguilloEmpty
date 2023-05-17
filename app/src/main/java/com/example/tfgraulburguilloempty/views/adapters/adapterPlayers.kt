@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.model.Player
@@ -50,13 +48,13 @@ class adapterPlayers(
 
             // itemview es el item de diseño
             // al que hay que poner los datos del objeto dataItem
-            val tvNombreJugador = itemView.findViewById(R.id.tvNombrePlayer2) as TextView
-            val tvPosicionarellenar = itemView.findViewById(R.id.tvPosicionarellenar) as TextView
-            val tvEdadaRellenar = itemView.findViewById(R.id.tvEdadaRellenar) as TextView
-            val tvnombreteam = itemView.findViewById(R.id.tvnombreTeam) as TextView
-            val tvLastName = itemView.findViewById(R.id.tvLastName) as TextView
+            val tvNombrePlayerAll = itemView.findViewById(R.id.tvNombrePlayerAll) as TextView
+            val tvPosicionarellenarAll = itemView.findViewById(R.id.tvPosicionarellenarAll) as TextView
+            val tvEdadaRellenarAll = itemView.findViewById(R.id.tvEdadaRellenarAll) as TextView
+            val tvnombreTeamAll = itemView.findViewById(R.id.tvnombreTeamAll) as TextView
+            val tvLastNameAll = itemView.findViewById(R.id.tvLastNameAll) as TextView
 
-            val ivPlayer = itemView.findViewById(R.id.ivPlayer) as ImageView
+            val ivPlayerAll = itemView.findViewById(R.id.ivPlayerAll) as ImageView
 
 
             if (dataItem.team == null ){
@@ -64,17 +62,17 @@ class adapterPlayers(
             } else if (dataItem.headShotURL == null) {
                 val id =
                     context.resources.getIdentifier("default_img", "drawable", context.packageName)
-                ivPlayer.setImageResource(id)
+                ivPlayerAll.setImageResource(id)
             }
             else if (dataItem.headShotURL != null){
-                tvNombreJugador.text = dataItem.firstName
-                tvPosicionarellenar.text = dataItem.position.toString()
-                tvEdadaRellenar.text = dataItem.age
-                tvnombreteam.text = dataItem.team
-                tvLastName.text = dataItem.lastName
+                tvNombrePlayerAll.text = dataItem.firstName
+                tvPosicionarellenarAll.text = dataItem.position.toString()
+                tvEdadaRellenarAll.text = dataItem.age
+                tvnombreTeamAll.text = dataItem.team
+                tvLastNameAll.text = dataItem.lastName
 
 
-                Picasso.get().load("${dataItem.headShotURL}").into(ivPlayer)
+                Picasso.get().load("${dataItem.headShotURL}").into(ivPlayerAll)
             }
 /*            when(dataItem.team){
                 "Orlando Magic" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Orlando)

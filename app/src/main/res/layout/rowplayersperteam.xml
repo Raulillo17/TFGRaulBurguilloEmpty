@@ -19,13 +19,13 @@
         android:layout_height="90dp">
 
         <TextView
-            android:id="@+id/tvEdadaRellenar"
+            android:id="@+id/tvEdadaRellenarPerTeam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.933"
-            card_view:layout_constraintStart_toEndOf="@+id/ivPlayer"
+            card_view:layout_constraintStart_toEndOf="@+id/ivPlayerPerTeam"
             card_view:layout_constraintTop_toTopOf="parent"
             tools:text="Edad" />
 
@@ -37,11 +37,11 @@
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.0"
-            card_view:layout_constraintStart_toEndOf="@+id/ivPlayer"
+            card_view:layout_constraintStart_toEndOf="@+id/ivPlayerPerTeam"
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/ivPlayer"
+            android:id="@+id/ivPlayerPerTeam"
             android:layout_width="115dp"
             android:layout_height="80dp"
             android:layout_marginTop="5dp"
@@ -64,7 +64,7 @@
             card_view:layout_constraintVertical_bias="0.507" />
 
         <TextView
-            android:id="@+id/tvPosicionarellenar"
+            android:id="@+id/tvPosicionarellenarPerTeam"
             android:layout_width="104dp"
             android:layout_height="0dp"
             android:layout_marginBottom="35dp"
@@ -73,10 +73,10 @@
             card_view:layout_constraintEnd_toStartOf="@+id/tvEdad"
             card_view:layout_constraintHorizontal_bias="0.352"
             card_view:layout_constraintStart_toEndOf="@+id/tvPosicion"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvNombreJugador" />
+            card_view:layout_constraintTop_toBottomOf="@+id/tvNombreJugadorPerTeam" />
 
         <TextView
-            android:id="@+id/tvLastName"
+            android:id="@+id/tvLastNamePerTeam"
             android:layout_width="91dp"
             android:layout_height="20dp"
             android:layout_marginTop="4dp"
@@ -85,16 +85,16 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvNombreJugador"
+            android:id="@+id/tvNombreJugadorPerTeam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="13dp"
             android:text="TextView"
-            card_view:layout_constraintBottom_toTopOf="@+id/tvPosicionarellenar"
-            card_view:layout_constraintEnd_toStartOf="@+id/tvLastName"
+            card_view:layout_constraintBottom_toTopOf="@+id/tvPosicionarellenarPerTeam"
+            card_view:layout_constraintEnd_toStartOf="@+id/tvLastNamePerTeam"
             card_view:layout_constraintHorizontal_bias="0.854"
-            card_view:layout_constraintStart_toEndOf="@+id/ivPlayer"
+            card_view:layout_constraintStart_toEndOf="@+id/ivPlayerPerTeam"
             card_view:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

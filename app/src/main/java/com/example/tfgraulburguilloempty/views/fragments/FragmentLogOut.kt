@@ -29,7 +29,7 @@ class FragmentLogOut : Fragment() {
     private lateinit var ivUsuario: ImageView
     private lateinit var  emailTextView: TextView
     private lateinit var  providerTextView: TextView
-    var db = FirebaseFirestore.getInstance()
+    val db = FirebaseFirestore.getInstance()
     private var auth: FirebaseAuth? = null
 
     override fun onCreateView(

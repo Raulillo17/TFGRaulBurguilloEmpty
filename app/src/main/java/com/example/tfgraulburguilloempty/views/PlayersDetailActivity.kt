@@ -42,7 +42,7 @@ class PlayersDetailActivity : AppCompatActivity() {
     private lateinit var tvPorT1: TextView
     val db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
 
-    val JugadoresFav = db.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
+    val JugadoresFav = db.collection("users") // Inicializar la referencia a la colección de favoritos
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityPlayersDetailBinding
@@ -86,7 +86,7 @@ class PlayersDetailActivity : AppCompatActivity() {
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error al añadir el jugador favorito", e)
                 }
-            msg("Has añadido a ${jugador.firstName} +  ${jugador.lastName} a favoritos" )
+            msg("Has añadido a ${jugador.firstName + " " + jugador.lastName} a favoritos" )
 
 
 

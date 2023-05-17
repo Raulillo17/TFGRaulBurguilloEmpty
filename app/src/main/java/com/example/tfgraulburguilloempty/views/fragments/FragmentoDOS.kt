@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.adapters.adapterPlayers
-import com.example.tfgraulburguilloempty.views.adapters.adapterTeams
 import com.example.tfgraulburguilloempty.views.model.Player
-import com.example.tfgraulburguilloempty.views.model.Team
 import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
 
 
@@ -21,8 +19,7 @@ class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var jugadores: List<Player>
     private val viewModel: MainViewModel = MainViewModel()
     private lateinit var adapter: adapterPlayers
-
-    private lateinit var rvPlayers2: RecyclerView
+    private lateinit var rvPlayersAll: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,10 +48,10 @@ class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
         })
     }
     fun initRV() {
-        rvPlayers2  = requireView().findViewById<RecyclerView>(R.id.rvPlayers2)
-        adapter = adapterPlayers(requireContext(),R.layout.rowplayers2)
-        rvPlayers2.adapter = adapter
-        rvPlayers2.layoutManager = LinearLayoutManager(requireContext())
+        rvPlayersAll  = requireView().findViewById<RecyclerView>(R.id.rvPlayersAll)
+        adapter = adapterPlayers(requireContext(),R.layout.rowplayersall)
+        rvPlayersAll.adapter = adapter
+        rvPlayersAll.layoutManager = LinearLayoutManager(requireContext())
 
     }
 

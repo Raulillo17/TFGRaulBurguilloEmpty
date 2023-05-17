@@ -13,23 +13,22 @@
     card_view:contentPadding="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clrowplayers2"
         android:layout_width="match_parent"
         android:layout_height="90dp">
 
         <TextView
-            android:id="@+id/tvEdadaRellenar"
+            android:id="@+id/tvEdadaRellenarFav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.933"
-            card_view:layout_constraintStart_toEndOf="@+id/ivPlayer"
+            card_view:layout_constraintStart_toEndOf="@+id/ivPlayerFav"
             card_view:layout_constraintTop_toTopOf="parent"
             tools:text="Edad" />
 
         <TextView
-            android:id="@+id/tvNombrePlayer2"
+            android:id="@+id/tvNombrePlayerFav"
             android:layout_width="82dp"
             android:layout_height="19dp"
             android:layout_marginTop="4dp"
@@ -37,7 +36,7 @@
             android:textAlignment="center"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.486"
-            card_view:layout_constraintStart_toEndOf="@+id/ivPlayer"
+            card_view:layout_constraintStart_toEndOf="@+id/ivPlayerFav"
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -48,12 +47,12 @@
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.0"
-            card_view:layout_constraintStart_toEndOf="@+id/ivPlayer"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvNombrePlayer2"
+            card_view:layout_constraintStart_toEndOf="@+id/ivPlayerFav"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvNombrePlayerAll"
             card_view:layout_constraintVertical_bias="0.234" />
 
         <ImageView
-            android:id="@+id/ivPlayer"
+            android:id="@+id/ivPlayerFav"
             android:layout_width="115dp"
             android:layout_height="80dp"
             android:layout_marginTop="5dp"
@@ -76,7 +75,7 @@
             card_view:layout_constraintVertical_bias="0.507" />
 
         <TextView
-            android:id="@+id/tvPosicionarellenar"
+            android:id="@+id/tvPosicionarellenarFav"
             android:layout_width="104dp"
             android:layout_height="20dp"
             android:text="TextView"
@@ -84,11 +83,11 @@
             card_view:layout_constraintEnd_toStartOf="@+id/tvEdad"
             card_view:layout_constraintHorizontal_bias="0.352"
             card_view:layout_constraintStart_toEndOf="@+id/tvPosicion"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvNombrePlayer2"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvNombrePlayerFav"
             card_view:layout_constraintVertical_bias="0.255" />
 
         <TextView
-            android:id="@+id/tvLastName"
+            android:id="@+id/tvLastNameFav"
             android:layout_width="91dp"
             android:layout_height="20dp"
             android:layout_marginTop="4dp"
@@ -97,7 +96,7 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvnombreTeam"
+            android:id="@+id/tvnombreTeamFav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
@@ -109,7 +108,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvPosicion"
-            app:layout_constraintTop_toBottomOf="@+id/tvPosicionarellenar" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPosicionarellenarFav" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

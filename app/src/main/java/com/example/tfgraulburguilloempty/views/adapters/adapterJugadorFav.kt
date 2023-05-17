@@ -48,13 +48,13 @@ class adapterJugadorFav(
 
             // itemview es el item de diseño
             // al que hay que poner los datos del objeto dataItem
-            val tvNombreJugador = itemView.findViewById(R.id.tvNombrePlayer2) as TextView
-            val tvPosicionarellenar = itemView.findViewById(R.id.tvPosicionarellenar) as TextView
-            val tvEdadaRellenar = itemView.findViewById(R.id.tvEdadaRellenar) as TextView
-            val tvnombreteam = itemView.findViewById(R.id.tvnombreTeam) as TextView
-            val tvLastName = itemView.findViewById(R.id.tvLastName) as TextView
+            val tvNombreJugadorFav = itemView.findViewById(R.id.tvNombrePlayerFav) as TextView
+            val tvPosicionarellenarFav = itemView.findViewById(R.id.tvPosicionarellenarFav) as TextView
+            val tvEdadaRellenarFav = itemView.findViewById(R.id.tvEdadaRellenarAll) as TextView
+            val tvnombreTeamFav = itemView.findViewById(R.id.tvnombreTeamFav) as TextView
+            val tvLastNameFav = itemView.findViewById(R.id.tvLastNameFav) as TextView
 
-            val ivPlayer = itemView.findViewById(R.id.ivPlayer) as ImageView
+            val ivPlayerFav = itemView.findViewById(R.id.ivPlayerFav) as ImageView
 
 
             if (dataItem.team == null ){
@@ -62,17 +62,17 @@ class adapterJugadorFav(
             } else if (dataItem.headShotURL == null) {
                 val id =
                     context.resources.getIdentifier("default_img", "drawable", context.packageName)
-                ivPlayer.setImageResource(id)
+                ivPlayerFav.setImageResource(id)
             }
             else if (dataItem.headShotURL != null){
-                tvNombreJugador.text = dataItem.firstName
-                tvPosicionarellenar.text = dataItem.position.toString()
-                tvEdadaRellenar.text = dataItem.age
-                tvnombreteam.text = dataItem.team
-                tvLastName.text = dataItem.lastName
+                tvNombreJugadorFav.text = dataItem.firstName
+                tvPosicionarellenarFav.text = dataItem.position.toString()
+                tvEdadaRellenarFav.text = dataItem.age
+                tvnombreTeamFav.text = dataItem.team
+                tvLastNameFav.text = dataItem.lastName
 
 
-                Picasso.get().load("${dataItem.headShotURL}").into(ivPlayer)
+                Picasso.get().load("${dataItem.headShotURL}").into(ivPlayerFav)
             }
 /*            when(dataItem.team){
                 "Orlando Magic" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Orlando)

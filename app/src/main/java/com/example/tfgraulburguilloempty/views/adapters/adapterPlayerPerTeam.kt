@@ -46,11 +46,11 @@ class adapterPlayerPerTeam(
 
             // itemview es el item de diseño
             // al que hay que poner los datos del objeto dataItem
-            val tvNombrePlayer = itemView.findViewById(R.id.tvNombreJugador) as TextView
-            val tvPosicionarellenar = itemView.findViewById(R.id.tvPosicionarellenar) as TextView
-            val tvEdadaRellenar = itemView.findViewById(R.id.tvEdadaRellenar) as TextView
-            val tvLastName = itemView.findViewById(R.id.tvLastName) as TextView
-            val ivPlayer = itemView.findViewById(R.id.ivPlayer) as ImageView
+            val tvNombreJugadorPerTeam = itemView.findViewById(R.id.tvNombreJugadorPerTeam) as TextView
+            val tvPosicionarellenarPerTeam = itemView.findViewById(R.id.tvPosicionarellenarPerTeam) as TextView
+            val tvEdadaRellenarPerTeam = itemView.findViewById(R.id.tvEdadaRellenarPerTeam) as TextView
+            val tvLastNamePerTeam = itemView.findViewById(R.id.tvLastNamePerTeam) as TextView
+            val ivPlayerPerTeam = itemView.findViewById(R.id.ivPlayerPerTeam) as ImageView
 
 
             if (dataItem.team == null ){
@@ -58,14 +58,14 @@ class adapterPlayerPerTeam(
             } else if (dataItem.headShotURL == null) {
                 val id =
                     context.resources.getIdentifier("default_img", "drawable", context.packageName)
-                ivPlayer.setImageResource(id)
+                ivPlayerPerTeam.setImageResource(id)
             }
             else if (dataItem.headShotURL != null){
-                tvNombrePlayer.text = dataItem.firstName
-                tvPosicionarellenar.text = dataItem.position.toString()
-                tvEdadaRellenar.text = dataItem.age
-                tvLastName.text = dataItem.lastName
-                Picasso.get().load("${dataItem.headShotURL}").into(ivPlayer)
+                tvNombreJugadorPerTeam.text = dataItem.firstName
+                tvPosicionarellenarPerTeam.text = dataItem.position.toString()
+                tvEdadaRellenarPerTeam.text = dataItem.age
+                tvLastNamePerTeam.text = dataItem.lastName
+                Picasso.get().load("${dataItem.headShotURL}").into(ivPlayerPerTeam)
             }
 
 

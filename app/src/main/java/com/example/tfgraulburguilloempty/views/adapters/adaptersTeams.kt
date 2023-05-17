@@ -57,6 +57,8 @@ class adapterTeams(
             val tvnombrecategoria = itemView.findViewById(R.id.tvnombreteam) as TextView
             val tvRecord = itemView.findViewById(R.id.tvRecord) as TextView
             val tvConferencia = itemView.findViewById(R.id.tvConferencia) as TextView*/
+
+
             val ivEquipo = itemView.findViewById(R.id.ivEquipo) as ImageView
             val tvEquipo = itemView.findViewById(R.id.tvEquipo) as TextView
 

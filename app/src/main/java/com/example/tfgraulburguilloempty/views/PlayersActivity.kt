@@ -17,7 +17,6 @@ import com.example.tfgraulburguilloempty.views.adapters.adapterPlayerPerTeam
 import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 
 
 class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
@@ -60,7 +59,7 @@ class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
 
     private fun initRV() {
         rvplayers  = findViewById<RecyclerView>(R.id.rvplayers)
-        adapter = adapterPlayerPerTeam(this,R.layout.rowplayers)
+        adapter = adapterPlayerPerTeam(this,R.layout.rowplayersperteam)
         rvplayers.adapter = adapter
         rvplayers.layoutManager = LinearLayoutManager(this)
     }

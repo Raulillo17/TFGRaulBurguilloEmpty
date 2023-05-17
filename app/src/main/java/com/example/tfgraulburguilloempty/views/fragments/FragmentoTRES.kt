@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.adapters.adapterJugadorFav
-import com.example.tfgraulburguilloempty.views.adapters.adapterPlayers
 import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,7 +25,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class FragmentoTRES : Fragment() {
     private lateinit var adapter: adapterJugadorFav
-    private lateinit var rvJugadorFav: RecyclerView
+    private lateinit var rvPlayersFav: RecyclerView
     val db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
 
     val usuariosRef = db.collection("users") // Referencia a la colección "usuarios"
@@ -48,10 +47,10 @@ class FragmentoTRES : Fragment() {
     }
 
     private fun initRV() {
-        rvJugadorFav  = requireView().findViewById<RecyclerView>(R.id.rvJugadorFav)
+        rvPlayersFav  = requireView().findViewById<RecyclerView>(R.id.rvPlayersFav)
         adapter = adapterJugadorFav(requireContext(),R.layout.rowplayersfav)
-        rvJugadorFav.adapter = adapter
-        rvJugadorFav.layoutManager = LinearLayoutManager(requireContext())
+        rvPlayersFav.adapter = adapter
+        rvPlayersFav.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun getJugadoresFavFireBase() {
