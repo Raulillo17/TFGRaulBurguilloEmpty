@@ -30,7 +30,7 @@ class FragmentLogOut : Fragment() {
     private lateinit var  emailTextView: TextView
     private lateinit var  providerTextView: TextView
     val db = FirebaseFirestore.getInstance()
-    private var auth: FirebaseAuth? = null
+    private var auth: FirebaseAuth? = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,17 +54,7 @@ class FragmentLogOut : Fragment() {
         emailTextView = view?.findViewById(R.id.tvEmailDetail)!!
         providerTextView = view?.findViewById(R.id.tvProviderDeatil)!!
         ivUsuario = view?.findViewById(R.id.ivUsuario)!!
-        ivUsuario.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "image/*"
-            startActivityForResult(
-                Intent.createChooser(intent, "Selecciona una imagen"),
-                REQUEST_IMAGE_GET
-            )
-
-        }
-
-/*        db.collection("users").document(auth!!.currentUser?.email.toString())
+        db.collection("users").document(auth!!.currentUser?.email.toString())
             .get().addOnSuccessListener { it ->
                 if (it.exists()) {
                     if (it.contains("email")) {
@@ -81,7 +71,18 @@ class FragmentLogOut : Fragment() {
                         }
                     }
                 }
-            }*/
+            }
+        ivUsuario.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            startActivityForResult(
+                Intent.createChooser(intent, "Selecciona una imagen"),
+                REQUEST_IMAGE_GET
+            )
+
+        }
+
+
 
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -98,10 +99,10 @@ class FragmentLogOut : Fragment() {
                     imageRef.downloadUrl.addOnSuccessListener { uri ->
                         db.collection("users").document(auth?.currentUser!!.email!!)
                             .update("foto", uri.toString())
-                        // carga la imagen usando Picasso desde la URL de descarga
+                        // carga la imagen usando Glide desde la URL de descarga
                         Glide.with(requireContext())
                             .load(uri.toString())
-                            .placeholder(R.drawable.default_img) // Imagen de espera mientras se carga la imagen
+                            .placeholder(R.drawable.img_3) // Imagen de espera mientras se carga la imagen
                             .into(ivUsuario)
                     }
 

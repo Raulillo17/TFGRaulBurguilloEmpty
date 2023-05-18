@@ -162,7 +162,6 @@ class AuthActivity : AppCompatActivity(){
         val defaultImage = R.drawable.default_img
         user["email"] = EmaileditText.text.toString()
         user["password"] = PasswordeditText.text.toString()
-        user["foto"] = defaultImage.toString()
         db.collection("users")
             .add(user)
             .addOnSuccessListener(OnSuccessListener<DocumentReference> { documentReference ->
