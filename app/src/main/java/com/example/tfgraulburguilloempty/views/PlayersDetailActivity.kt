@@ -79,7 +79,7 @@ class PlayersDetailActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-            JugadoresFav.add(jugador)
+            JugadoresFav.add(jugador.lastName!! + jugador.headShotURL!! + jugador.careerPoints!! + jugador.carrerAssists!! + jugador.careerRebounds!!)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "Jugador favorito añadido con ID: ${documentReference.id}")
                 }

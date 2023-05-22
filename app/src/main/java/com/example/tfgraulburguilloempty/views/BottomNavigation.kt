@@ -78,16 +78,6 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_logout -> {
-                //borrado de datos
-                val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-                prefs.clear()
-                prefs.apply()
-                FirebaseAuth.getInstance().signOut()
-                onBackPressed()
-                true
-            }
-
             else -> super.onOptionsItemSelected(item)
         }
     }

@@ -81,6 +81,14 @@ enum class Conference(val value: String) {
     @SerializedName("Western") Western("Western");
 }
 
+data class Jugador(
+    val lastName: String? = null,
+    val careerPoints: Double,
+    val careerRebounds: Double,
+    val carrerAssists: Double,
+    val headShotURL: String? = null,
+)
+
 data class Respuesta(
     val jugadores:List<Player>,
     val equipos:List<Team>,

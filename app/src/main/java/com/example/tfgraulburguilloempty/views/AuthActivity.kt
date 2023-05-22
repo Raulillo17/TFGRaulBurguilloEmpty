@@ -35,6 +35,7 @@ class AuthActivity : AppCompatActivity(){
     var db = FirebaseFirestore.getInstance()
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //Thread.sleep(3000)
         //setTheme(R.style.Theme_TFGRaulBurguilloEmpty)
@@ -86,7 +87,7 @@ class AuthActivity : AppCompatActivity(){
             if (EmaileditText.text.isNotEmpty() && PasswordeditText.text.isNotEmpty()) {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(EmaileditText.text.toString(), PasswordeditText.text.toString()).addOnCompleteListener(){
                     if (it.isSuccessful){
-                        addData()
+                        UpdateData()
                         showTeamsActivity(it.result?.user?.email ?: "", ProviderType.BASIC)
                     }
                     else {
@@ -159,15 +160,42 @@ class AuthActivity : AppCompatActivity(){
 
     private fun addData() {
         val user: MutableMap<String, String> = HashMap() // diccionario key value
-        val defaultImage = R.drawable.default_img
+        val defaultImage = R.drawable.perfil1
         user["email"] = EmaileditText.text.toString()
         user["password"] = PasswordeditText.text.toString()
-        db.collection("users")
-            .add(user)
-            .addOnSuccessListener(OnSuccessListener<DocumentReference> { documentReference ->
-                val JugadoresFav = documentReference.collection("JugadoresFav")
-                Log.d(TAG,"DocumentSnapshot added with ID: " + documentReference.id)
+        db.collection("users").document(user["email"]!!)
+            .set(user)
+            .addOnSuccessListener{ documentReference ->
+             Log.d(TAG,"DocumentSnapshot added with ID: " + documentReference)
+
+                // Crear la colección "JugadoresFav" dentro del documento de usuario
+                val jugadoresFav: MutableMap<String, Any> = HashMap()
+                db.collection("users").document(user["email"]!!).collection("JugadoresFav").document("favoritos")
+                    .set(jugadoresFav)
+                    .addOnSuccessListener {
+                        // Colección "JugadoresFav" creada exitosamente
+                        Log.d(TAG, "Colección JugadoresFav creada exitosamente")
+                    }
+                    .addOnFailureListener { e ->
+                        // Error al crear la colección "JugadoresFav"
+                        Log.w(TAG, "Error al crear la colección JugadoresFav", e)
+                    }
+            }
+            .addOnFailureListener(OnFailureListener { e ->
+                Log.w(TAG,"Error adding document", e)
             })
+    }
+
+    private fun UpdateData() {
+        val user: MutableMap<String, String> = HashMap() // diccionario key value
+        val defaultImage = R.drawable.perfil1
+        user["email"] = EmaileditText.text.toString()
+        user["password"] = PasswordeditText.text.toString()
+        db.collection("users").document(user["email"]!!)
+            .update(user as Map<String, String>)
+            .addOnSuccessListener{ documentReference ->
+                Log.d(TAG,"DocumentSnapshot added with ID: " + documentReference)
+            }
             .addOnFailureListener(OnFailureListener { e ->
                 Log.w(TAG,"Error adding document", e)
             })

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/llEquipos"
+    android:id="@+id/llPlayersFav"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:onClick="onClickTeam"
@@ -11,14 +11,14 @@
 
 
     <ImageView
-        android:id="@+id/ivEquipo"
+        android:id="@+id/ivJugadorFireBaseFav"
         android:layout_width="match_parent"
         android:layout_height="77dp"
         android:layout_marginTop="10dp"
         app:srcCompat="@drawable/gsw" />
 
     <TextView
-        android:id="@+id/tvEquipo"
+        android:id="@+id/tvJugadorNombreFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

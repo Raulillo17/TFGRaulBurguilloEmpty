@@ -36,24 +36,6 @@ class FragmentLogOut : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       /* val correoElectronico = arguments?.getString("correoElectronico")
-        val providerUser = arguments?.getString("providerUser")
-
-
-        if (emailTextView != null && providerTextView != null) {
-            emailTextView.text = correoElectronico
-            providerTextView.text = providerUser
-        }*/
-        // Inflate the layout for this fragment
-
-        return inflater.inflate(R.layout.fragment_log_out, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        emailTextView = view?.findViewById(R.id.tvEmailDetail)!!
-        providerTextView = view?.findViewById(R.id.tvProviderDeatil)!!
-        ivUsuario = view?.findViewById(R.id.ivUsuario)!!
         db.collection("users").document(auth!!.currentUser?.email.toString())
             .get().addOnSuccessListener { it ->
                 if (it.exists()) {
@@ -72,6 +54,26 @@ class FragmentLogOut : Fragment() {
                     }
                 }
             }
+
+       /* val correoElectronico = arguments?.getString("correoElectronico")
+        val providerUser = arguments?.getString("providerUser")
+
+
+        if (emailTextView != null && providerTextView != null) {
+            emailTextView.text = correoElectronico
+            providerTextView.text = providerUser
+        }*/
+        // Inflate the layout for this fragment
+
+        return inflater.inflate(R.layout.fragment_log_out, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        emailTextView = view?.findViewById(R.id.tvEmailDetail)!!
+        providerTextView = view?.findViewById(R.id.tvProviderDeatil)!!
+        ivUsuario = view?.findViewById(R.id.ivUsuario)!!
+
         ivUsuario.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
