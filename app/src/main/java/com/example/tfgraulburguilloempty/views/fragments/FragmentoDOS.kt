@@ -22,12 +22,17 @@ class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var adapter: adapterPlayers
     private lateinit var rvPlayersAll: RecyclerView
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_fragmento_d_o_s, container, false)
-        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbarJugadores)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         // Inflate the layout for this fragment
         return view
@@ -59,9 +64,9 @@ class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         val searchItem = menu.findItem(R.id.action_search)
-        searchView = searchItem.actionView as SearchView
-        searchView.setQueryHint("Search...")
-        searchView.setOnQueryTextListener(this)
+/*        searchView = searchItem?.actionView as SearchView
+        searchView?.setQueryHint("Search...")
+        searchView?.setOnQueryTextListener(this)*/
 
     }
 

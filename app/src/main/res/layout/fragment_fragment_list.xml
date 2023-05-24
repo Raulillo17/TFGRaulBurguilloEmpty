@@ -7,8 +7,13 @@
     android:background="@color/design_default_color_background"
     tools:context=".views.fragments.FragmentList">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.TFGRaulBurguilloEmpty.AppBarOverlay"
+        tools:ignore="MissingConstraints">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarEquipos"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
@@ -18,6 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Equipos"
         app:titleTextColor="@android:color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView

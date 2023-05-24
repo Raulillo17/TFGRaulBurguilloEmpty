@@ -34,7 +34,7 @@ class adapterJugadorFav(
         return dataList.size
     }
 
-    internal fun setJugadores(jugadores: ArrayList<Jugador>) {
+    internal fun setJugadoresFav(jugadores: ArrayList<Jugador>) {
         this.dataList = jugadores
         notifyDataSetChanged()
     }

@@ -29,20 +29,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".views.TeamsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_teams"
-            android:theme="@style/Theme.TFGRaulBurguilloEmpty.NoActionBar" />
-        <activity
             android:name=".views.PlayersDetailActivity"
             android:exported="false"
-            android:label="@string/title_activity_players_detail"
-            android:theme="@style/Theme.TFGRaulBurguilloEmpty.NoActionBar" />
+            android:label="@string/title_activity_players_detail"/>
         <activity
             android:name=".views.PlayersActivity"
             android:exported="false"
             android:label="@string/title_activity_players"
-            android:theme="@style/Theme.TFGRaulBurguilloEmpty.NoActionBar" />
+            android:theme="@style/Theme.TFGRaulBurguilloEmpty.NoActionBar"/>
         <activity
             android:name=".views.AuthActivity"
             android:exported="true"

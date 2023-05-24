@@ -32,8 +32,6 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
     private lateinit var binding: BottomNavigationView
 
 
-
-        @SuppressLint("MissingInflatedId")
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
 
@@ -53,7 +51,6 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
                 provideapasar = provider
             }
 
-            title = "Equipos"
 
             //guardado de datos
             val prefs = getSharedPreferences(getString(com.example.tfgraulburguilloempty.R.string.prefs_file), Context.MODE_PRIVATE).edit()
@@ -65,7 +62,7 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
 
         }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+/*    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         val inflater = menuInflater
         inflater.inflate(com.example.tfgraulburguilloempty.R.menu.menu_main, menu)
@@ -81,7 +78,7 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
         return when (item.itemId) {
             else -> super.onOptionsItemSelected(item)
         }
-    }
+    }*/
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             var fragment: Fragment? = null
             when (item.itemId) {

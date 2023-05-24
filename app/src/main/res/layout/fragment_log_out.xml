@@ -4,26 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.fragments.FragmentList">
+    tools:context=".views.fragments.FragmentLogOut">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
+        android:layout_width="410dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="264dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginBottom="332dp"
+        android:theme="@style/Theme.TFGRaulBurguilloEmpty.AppBarOverlay"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Ajustes"
-        app:titleTextColor="@android:color/white" />
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarInfo"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/rvPlayersFav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Info Usuario"
+            app:titleTextColor="@android:color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <Button
         android:id="@+id/btnLogOut"
         android:layout_width="179dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="135dp"
+        android:layout_marginBottom="62dp"
         android:onClick="onClickLogOut"
         android:text="Cerrar Sesion"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,23 +47,23 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginStart="82dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="29dp"
         android:text="Usuario:"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toStartOf="@+id/tvEmailDetail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="108dp"
-        android:text="Proveedor:"
+        android:layout_marginStart="82dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="88dp"
+        android:text="Contraseña:"
         app:layout_constraintBottom_toTopOf="@+id/btnLogOut"
         app:layout_constraintEnd_toStartOf="@+id/tvProviderDeatil"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,13 +72,12 @@
     <TextView
         android:id="@+id/tvEmailDetail"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="19dp"
         android:layout_marginEnd="80dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/tvProviderDeatil"
@@ -86,6 +97,6 @@
         app:layout_constraintBottom_toTopOf="@+id/tvEmailDetail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

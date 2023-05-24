@@ -2,7 +2,9 @@ package com.example.tfgraulburguilloempty.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -21,6 +23,7 @@ import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
 
 class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
 
+    private lateinit var binding: ActivityPlayersBinding
     private lateinit var emailapasar: String
     private lateinit var players: List<Player>
     private lateinit var rvplayers: RecyclerView
@@ -30,7 +33,7 @@ class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
     private lateinit var equipo: Team
     private lateinit var searchView: SearchView
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityPlayersBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +41,7 @@ class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
         binding = ActivityPlayersBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.toolbarJugadoresPorEquipo)
         equipo = intent.getSerializableExtra("equipo") as Team
         emailapasar = intent.getSerializableExtra("emailapasar") as String
         title = equipo.name
@@ -50,12 +53,25 @@ class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        val searchItem = menu.findItem(R.id.action_search)
+        menuInflater.inflate(R.menu.menu_players_perteam, menu)
+        val searchItem = menu.findItem(R.id.action_search_players_perteam)
         val searchView = searchItem?.actionView as? SearchView
         searchView?.setQueryHint("Search...")
         searchView?.setOnQueryTextListener(this)
         return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            R.id.action_search_players_perteam -> {
+                Log.d("Raul", "Funciona")
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun getPlayersByTeam(teamName: String) {

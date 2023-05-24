@@ -2,9 +2,10 @@ package com.example.tfgraulburguilloempty.views.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.helper.widget.MotionEffect.TAG
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.adapters.adapterJugadorFav
 import com.example.tfgraulburguilloempty.views.model.Jugador
+import com.example.tfgraulburguilloempty.views.model.Player
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,7 +28,8 @@ private const val ARG_PARAM2 = "param2"
  * Use the [FragmentoTRES.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FragmentoTRES : Fragment() {
+class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
+    private lateinit var jugadores: List<Jugador>
     private lateinit var JugadoresFav: CollectionReference
     private lateinit var documentRef: DocumentReference
     private lateinit var collectionRef: CollectionReference
@@ -51,18 +54,26 @@ class FragmentoTRES : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_fragmento_t_r_e_s, container, false)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbarJugadoresFav)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
        emailapasar = arguments?.getString("emailapasar")!!
         db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
         collectionRef = db.collection("users")
         documentRef = collectionRef.document(emailapasar)
         JugadoresFav = documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragmento_t_r_e_s, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,6 +88,32 @@ class FragmentoTRES : Fragment() {
         rvPlayersFav.adapter = adapter
         rvPlayersFav.layoutManager = LinearLayoutManager(requireContext())
     }*/
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        val searchItem = menu.findItem(R.id.action_search)
+/*       searchView = searchItem?.actionView as SearchView
+        searchView?.setQueryHint("Search...")
+        searchView?.setOnQueryTextListener(this)*/
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        val original = ArrayList<Jugador>(jugadores)
+        adapter.setJugadoresFav(original.filter { jugador ->  jugador.lastName!!.contains(query.toString(), true) } as ArrayList<Jugador>)
+        return false
+    }
 
     private fun initRV() {
         val rvPlayersFav = requireView().findViewById<RecyclerView>(R.id.rvPlayersFav)
@@ -108,7 +145,7 @@ class FragmentoTRES : Fragment() {
                     Log.d(TAG, "Jugador favorito: $nombreequipo")
                 }
                 // Notifica al adaptador que los datos han cambiado
-                adapter.setJugadores(itemList)
+                adapter.setJugadoresFav(itemList)
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error al recuperar los jugadores favoritos", exception)

@@ -11,7 +11,7 @@
     <item
         android:id="@+id/navigation_tres"
         android:icon="@drawable/favorito"
-        android:title="Favoritos" />
+        android:title="Jugadores Favoritos" />
     <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"

@@ -49,11 +49,8 @@ class PlayersDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_players_detail)
 
-        binding = ActivityPlayersDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
 
         tvJersey = findViewById<TextView>(R.id.tvJersey)
         tvPuntosDetail = findViewById<TextView>(R.id.tvPuntosDetail)

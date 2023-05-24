@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.example.tfgraulburguilloempty.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -38,6 +40,9 @@ class FragmentLogOut : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_log_out, container, false)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbarInfo)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
         db.collection("users").document(auth!!.currentUser?.email.toString())
             .get().addOnSuccessListener { it ->
                 if (it.exists()) {
@@ -67,7 +72,7 @@ class FragmentLogOut : Fragment() {
         }*/
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_log_out, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
