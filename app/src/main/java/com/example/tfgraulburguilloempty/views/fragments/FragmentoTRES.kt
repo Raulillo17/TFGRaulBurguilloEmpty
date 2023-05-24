@@ -105,15 +105,7 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
         }
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        return false
-    }
 
-    override fun onQueryTextChange(query: String?): Boolean {
-        val original = ArrayList<Jugador>(jugadores)
-        adapter.setJugadoresFav(original.filter { jugador ->  jugador.lastName!!.contains(query.toString(), true) } as ArrayList<Jugador>)
-        return false
-    }
 
     private fun initRV() {
         val rvPlayersFav = requireView().findViewById<RecyclerView>(R.id.rvPlayersFav)
@@ -150,6 +142,18 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error al recuperar los jugadores favoritos", exception)
             }
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        val original = ArrayList<Jugador>(jugadores)
+        adapter.setJugadoresFav(original.filter { jugador ->
+            jugador.lastName?.contains(query.toString(), true) ?: false
+        } as ArrayList<Jugador>)
+        return false
     }
 
 

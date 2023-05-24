@@ -17,7 +17,7 @@ import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
 
 class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var searchView: SearchView
-    private lateinit var jugadores: List<Player>
+    private lateinit var players: List<Player>
     private val viewModel: MainViewModel = MainViewModel()
     private lateinit var adapter: adapterPlayers
     private lateinit var rvPlayersAll: RecyclerView
@@ -44,11 +44,21 @@ class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
         initRV()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        val searchItem = menu.findItem(R.id.action_search)
+        searchView = searchItem?.actionView as SearchView
+        searchView?.setQueryHint("Search...")
+        searchView?.setOnQueryTextListener(this)
+
+    }
+
     private fun getJugadores() {
         viewModel.getJugadores().observe(viewLifecycleOwner, Observer { it ->
             it?.let{
+                players = it
                 adapter.setJugadores(it)
-                jugadores = it
+
 
             }
         })
@@ -61,14 +71,6 @@ class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_main, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-/*        searchView = searchItem?.actionView as SearchView
-        searchView?.setQueryHint("Search...")
-        searchView?.setOnQueryTextListener(this)*/
-
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -81,8 +83,10 @@ class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(query: String?): Boolean {
-        val original = ArrayList<Player>(jugadores)
-        adapter.setJugadores(original.filter { jugador ->  jugador.firstName!!.contains(query.toString(), true) })
+        val original = ArrayList<Player>(players)
+        adapter.setJugadores(original.filter { jugador ->
+            jugador.firstName?.contains(query.toString(), true) ?: false
+        })
         return false
     }
 
