@@ -16,6 +16,7 @@ import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
 
 
 class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
+    private lateinit var searchView: SearchView
     private lateinit var jugadores: List<Player>
     private val viewModel: MainViewModel = MainViewModel()
     private lateinit var adapter: adapterPlayers
@@ -49,7 +50,7 @@ class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
     }
     fun initRV() {
         rvPlayersAll  = requireView().findViewById<RecyclerView>(R.id.rvPlayersAll)
-        adapter = adapterPlayers(requireContext(),R.layout.rowplayersall)
+        adapter = adapterPlayers(requireContext(), R.layout.rowplayersall)
         rvPlayersAll.adapter = adapter
         rvPlayersAll.layoutManager = LinearLayoutManager(requireContext())
 
@@ -57,16 +58,16 @@ class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+        val searchItem = menu.findItem(R.id.action_search)
+        searchView = searchItem.actionView as SearchView
+        searchView.setQueryHint("Search...")
+        searchView.setOnQueryTextListener(this)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_search -> {
-                // Acción para el Item 1
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

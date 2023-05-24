@@ -24,6 +24,7 @@ import com.squareup.picasso.Picasso
 
 class PlayersDetailActivity : AppCompatActivity() {
 
+    private lateinit var emailapasar: String
     private lateinit var nombredelEquipo: String
     private lateinit var colorFondo: View
     private lateinit var ivPlayerDetail: ImageView
@@ -40,9 +41,8 @@ class PlayersDetailActivity : AppCompatActivity() {
     private lateinit var tvPorP3: TextView
     private lateinit var tvPorT2: TextView
     private lateinit var tvPorT1: TextView
-    val db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
 
-    val JugadoresFav = db.collection("users") // Inicializar la referencia a la colección de favoritos
+
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityPlayersDetailBinding
@@ -71,15 +71,21 @@ class PlayersDetailActivity : AppCompatActivity() {
 
         jugador = intent.getSerializableExtra("jugador") as Player
         equipo = intent.getSerializableExtra("equipo") as Team
+        emailapasar = intent.getSerializableExtra("emailapasar") as String
 
         title = "${jugador.firstName + "  " + jugador.team}"
+
+        val db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
+        val collectionRef = db.collection("users")
+        val documentRef = collectionRef.document(emailapasar)
+        val JugadoresFav = documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
 
         showDetail()
 
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-            JugadoresFav.add(jugador.lastName!! + jugador.headShotURL!! + jugador.careerPoints!! + jugador.carrerAssists!! + jugador.careerRebounds!!)
+            JugadoresFav.add(jugador)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "Jugador favorito añadido con ID: ${documentReference.id}")
                 }

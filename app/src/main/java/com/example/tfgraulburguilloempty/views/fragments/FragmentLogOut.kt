@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.tfgraulburguilloempty.R
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -31,6 +32,7 @@ class FragmentLogOut : Fragment() {
     private lateinit var  providerTextView: TextView
     val db = FirebaseFirestore.getInstance()
     private var auth: FirebaseAuth? = FirebaseAuth.getInstance()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,7 +106,7 @@ class FragmentLogOut : Fragment() {
                         // carga la imagen usando Glide desde la URL de descarga
                         Glide.with(requireContext())
                             .load(uri.toString())
-                            .placeholder(R.drawable.img_3) // Imagen de espera mientras se carga la imagen
+                            .placeholder(R.drawable.perfil1) // Imagen de espera mientras se carga la imagen
                             .into(ivUsuario)
                     }
 

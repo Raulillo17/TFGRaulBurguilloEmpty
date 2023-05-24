@@ -21,6 +21,7 @@ import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
 
 class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
 
+    private lateinit var emailapasar: String
     private lateinit var players: List<Player>
     private lateinit var rvplayers: RecyclerView
     private lateinit var adapter: adapterPlayerPerTeam
@@ -39,12 +40,22 @@ class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
 
         setSupportActionBar(binding.toolbar)
         equipo = intent.getSerializableExtra("equipo") as Team
+        emailapasar = intent.getSerializableExtra("emailapasar") as String
         title = equipo.name
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         initRV()
         getPlayersByTeam(equipo.name)
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem?.actionView as? SearchView
+        searchView?.setQueryHint("Search...")
+        searchView?.setOnQueryTextListener(this)
+        return true
     }
 
     private fun getPlayersByTeam(teamName: String) {
@@ -64,15 +75,7 @@ class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
         rvplayers.layoutManager = LinearLayoutManager(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(com.example.tfgraulburguilloempty.R.menu.menu_main, menu)
-/*        val searchItem = menu.findItem(R.id.action_search)
-        searchView = searchItem.actionView as SearchView
-        searchView.setQueryHint("Search...")
-        searchView.setOnQueryTextListener(this)*/
-        return true
-    }
+
     override fun onQueryTextSubmit(query: String?): Boolean {
         return false
     }
@@ -88,6 +91,7 @@ class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
         val intent = Intent(this, PlayersDetailActivity::class.java)
         intent.putExtra("jugador", jugador)
         intent.putExtra("equipo", equipo)
+        intent.putExtra("emailapasar", emailapasar)
         startActivity(intent)
 
     }

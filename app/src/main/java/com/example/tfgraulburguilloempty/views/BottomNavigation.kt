@@ -8,8 +8,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.example.tfgraulburguilloempty.R
+import com.example.tfgraulburguilloempty.views.adapters.adapterPlayers
 import com.example.tfgraulburguilloempty.views.fragments.*
 import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
@@ -20,13 +22,14 @@ enum class ProviderType{
     BASIC,
     GOOGLE
 }
-class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
 
 
+    private lateinit var searchView: SearchView
     private lateinit var provideapasar: String
     private lateinit var emailapasar: String
     private lateinit var nav_view: BottomNavigationView
-        private lateinit var binding: BottomNavigationView
+    private lateinit var binding: BottomNavigationView
 
 
 
@@ -57,8 +60,6 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
             prefs.putString("email", email)
             prefs.putString("provider", provider)
             prefs.apply()
-
-
 
 
 
@@ -118,6 +119,9 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
         fragmentTransaction.commit()
     }
     private fun replaceFragment(fragment: Fragment) {
+        val args = Bundle()
+        args.putString("emailapasar", emailapasar)
+        fragment.arguments = args
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame, fragment)
         fragmentTransaction.commit()
@@ -127,6 +131,8 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
         val equipo = v.tag as Team
         val intent = Intent(this, PlayersActivity::class.java)
         intent.putExtra("equipo", equipo)
+        intent.putExtra("emailapasar", emailapasar)
+
         startActivity(intent)
 
     }
@@ -152,4 +158,7 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
     }
 
 
+
 }
+
+

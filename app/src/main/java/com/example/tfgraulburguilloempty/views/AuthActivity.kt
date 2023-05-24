@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 
+
 class AuthActivity : AppCompatActivity(){
     private lateinit var googlebutton: Button
     private lateinit var PasswordeditText: EditText
@@ -33,6 +34,8 @@ class AuthActivity : AppCompatActivity(){
     private lateinit var analytics: FirebaseAnalytics
     private val GOOGLE_SIGN_IN = 100
     var db = FirebaseFirestore.getInstance()
+    val user = FirebaseAuth.getInstance().currentUser
+
 
 
 
@@ -110,6 +113,7 @@ class AuthActivity : AppCompatActivity(){
             googleClient.signOut()
 
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
+            addDataGoogle()
         }
 
 
@@ -160,30 +164,84 @@ class AuthActivity : AppCompatActivity(){
 
     private fun addData() {
         val user: MutableMap<String, String> = HashMap() // diccionario key value
-        val defaultImage = R.drawable.perfil1
+        val googleSignInAccount = GoogleSignIn.getLastSignedInAccount(applicationContext)
+        val photoUrl = googleSignInAccount?.photoUrl?.toString()
+
         user["email"] = EmaileditText.text.toString()
         user["password"] = PasswordeditText.text.toString()
-        db.collection("users").document(user["email"]!!)
-            .set(user)
-            .addOnSuccessListener{ documentReference ->
-             Log.d(TAG,"DocumentSnapshot added with ID: " + documentReference)
+        val docuemntemail = user["email"]
 
-                // Crear la colección "JugadoresFav" dentro del documento de usuario
-                val jugadoresFav: MutableMap<String, Any> = HashMap()
-                db.collection("users").document(user["email"]!!).collection("JugadoresFav").document("favoritos")
-                    .set(jugadoresFav)
-                    .addOnSuccessListener {
-                        // Colección "JugadoresFav" creada exitosamente
-                        Log.d(TAG, "Colección JugadoresFav creada exitosamente")
-                    }
-                    .addOnFailureListener { e ->
-                        // Error al crear la colección "JugadoresFav"
-                        Log.w(TAG, "Error al crear la colección JugadoresFav", e)
-                    }
-            }
-            .addOnFailureListener(OnFailureListener { e ->
-                Log.w(TAG,"Error adding document", e)
-            })
+        if (photoUrl != null) {
+            val userData = hashMapOf(
+                "photoUrl" to photoUrl
+            )
+
+
+            db.collection("users").document(user["email"]!!)
+                .set(user)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference)
+
+                    // Crear la colección "JugadoresFav" dentro del documento de usuario
+                    val jugadoresFav: MutableMap<String, Any> = HashMap()
+                    db.collection("users").document(docuemntemail!!).collection("JugadoresFav")
+                        .document("favoritos")
+                        .set(jugadoresFav)
+                        .addOnSuccessListener {
+                            // Colección "JugadoresFav" creada exitosamente
+                            Log.d(TAG, "Colección JugadoresFav creada exitosamente")
+                        }
+                        .addOnFailureListener { e ->
+                            // Error al crear la colección "JugadoresFav"
+                            Log.w(TAG, "Error al crear la colección JugadoresFav", e)
+                        }
+                }
+                .addOnFailureListener(OnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                })
+        }
+    }
+
+    private fun addDataGoogle() {
+       /* val user: MutableMap<String, String> = HashMap() // diccionario key value*/
+        val googleSignInAccount = GoogleSignIn.getLastSignedInAccount(applicationContext)
+        val photoUrl = googleSignInAccount?.photoUrl?.toString()
+       /* user["email"] = EmaileditText.text.toString()
+        user["password"] = PasswordeditText.text.toString()*/
+        val name = googleSignInAccount?.displayName
+        val email = googleSignInAccount?.email
+
+        if (photoUrl != null && name != null && email != null) {
+            val userData = hashMapOf(
+                "photoUrl" to photoUrl,
+                "name" to name,
+                "email" to email
+                // Agrega aquí otros campos que desees guardar
+            )
+
+            db.collection("users").document(email)
+                .set(userData)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference)
+
+                    // Crear la colección "JugadoresFav" dentro del documento de usuario
+                    val jugadoresFav: MutableMap<String, Any> = HashMap()
+                    db.collection("users").document(email).collection("JugadoresFav")
+                        .document("favoritos")
+                        .set(jugadoresFav)
+                        .addOnSuccessListener {
+                            // Colección "JugadoresFav" creada exitosamente
+                            Log.d(TAG, "Colección JugadoresFav creada exitosamente")
+                        }
+                        .addOnFailureListener { e ->
+                            // Error al crear la colección "JugadoresFav"
+                            Log.w(TAG, "Error al crear la colección JugadoresFav", e)
+                        }
+                }
+                .addOnFailureListener(OnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                })
+        }
     }
 
     private fun UpdateData() {
