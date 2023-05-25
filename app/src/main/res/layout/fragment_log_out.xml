@@ -9,10 +9,10 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="410dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="332dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="52dp"
         android:theme="@style/Theme.TFGRaulBurguilloEmpty.AppBarOverlay"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/ivUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,7 +21,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarInfo"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/rvPlayersFav"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,68 +34,66 @@
     <Button
         android:id="@+id/btnLogOut"
         android:layout_width="179dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="62dp"
+        android:layout_height="54dp"
         android:onClick="onClickLogOut"
         android:text="Cerrar Sesion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="82dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="29dp"
-        android:text="Usuario:"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/tvEmailDetail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="82dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="88dp"
-        android:text="Contraseña:"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogOut"
-        app:layout_constraintEnd_toStartOf="@+id/tvProviderDeatil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvProviderDeatil" />
 
     <TextView
         android:id="@+id/tvEmailDetail"
-        android:layout_width="0dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="80dp"
+        android:layout_width="306dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="20dp"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/ivUsuario" />
 
     <TextView
         android:id="@+id/tvProviderDeatil"
-        android:layout_width="0dp"
-        android:layout_height="21dp"
-        android:layout_marginEnd="156dp"
+        android:layout_width="308dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailDetail" />
 
     <ImageView
         android:id="@+id/ivUsuario"
         android:layout_width="176dp"
         android:layout_height="198dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/circle"
         android:src="@drawable/perfil1"
-        app:layout_constraintBottom_toTopOf="@+id/tvEmailDetail"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="46dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/seguro"
+        app:layout_constraintEnd_toStartOf="@+id/tvProviderDeatil"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="304dp"
+        android:src="@drawable/usuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 

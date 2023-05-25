@@ -1,6 +1,7 @@
 package com.example.tfgraulburguilloempty.views
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Layout
@@ -14,9 +15,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.helper.widget.MotionEffect.TAG
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.tfgraulburguilloempty.R
+import com.example.tfgraulburguilloempty.databinding.ActivityPlayersBinding
 import com.example.tfgraulburguilloempty.databinding.ActivityPlayersDetailBinding
 import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
@@ -42,14 +45,17 @@ class PlayersDetailActivity : AppCompatActivity() {
     private lateinit var tvPorT2: TextView
     private lateinit var tvPorT1: TextView
 
-
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityPlayersDetailBinding
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_players_detail)
+
+        binding = ActivityPlayersDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbarJugadoresDetail)
 
 
         tvJersey = findViewById<TextView>(R.id.tvJersey)
@@ -76,12 +82,58 @@ class PlayersDetailActivity : AppCompatActivity() {
         val collectionRef = db.collection("users")
         val documentRef = collectionRef.document(emailapasar)
         val JugadoresFav = documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
+        val fabjugador = findViewById<FloatingActionButton>(R.id.fab)
+        // Obtén el color de fondo actual del botón FAB
+        val buttonColor = fabjugador.backgroundTintList?.defaultColor
+
+
+        //Comprobamos si el jugador esta en favorito o no para cambiar el color del boton
+        JugadoresFav.get()
+            .addOnSuccessListener{ snapshot ->
+            if (snapshot != null) {
+                for (document in snapshot.documents) {
+                    // Compara el objeto en cada documento con el objeto buscado
+                    if (document.getString("id") == jugador.id.toString()) {
+                        // El objeto está presente en la colección
+                        Log.d(TAG, "El jugador existe y cambiamos el color")
+                        fabjugador.setBackgroundColor(Color.RED)
+                        break
+                    }else{
+                        Log.d(TAG, "El jugador no existe ")
+                        fabjugador.setBackgroundColor(Color.BLUE)
+                    }
+
+                }
+            }
+        }
 
         showDetail()
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        fabjugador.setOnClickListener {
+            if (buttonColor == Color.BLUE) {
+                JugadoresFav.add(jugador)
+                    .addOnSuccessListener { documentReference ->
+                        Log.d(TAG, "Jugador favorito añadido con ID: ${documentReference.id}")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Error al añadir el jugador favorito", e)
+                    }
+                msg("Has añadido a ${jugador.firstName + " " + jugador.lastName} a favoritos" )
+            }else{
+                JugadoresFav.document().delete()
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Jugador eliminado")
+                    }
+                    .addOnFailureListener {
+                        Log.w(TAG, "Error al eliminar el jugador favorito")
+                    }
+                msg("Has eliminado a ${jugador.firstName + " " + jugador.lastName} de favoritos" )
+            }
+            }
+
+
+
+/*            if (jugador.equals(jugador.id))
             JugadoresFav.add(jugador)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "Jugador favorito añadido con ID: ${documentReference.id}")
@@ -89,12 +141,12 @@ class PlayersDetailActivity : AppCompatActivity() {
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error al añadir el jugador favorito", e)
                 }
-            msg("Has añadido a ${jugador.firstName + " " + jugador.lastName} a favoritos" )
+            msg("Has añadido a ${jugador.firstName + " " + jugador.lastName} a favoritos" )*/
 
 
 
         }
-    }
+
 
     @SuppressLint("ResourceAsColor")
     private fun showDetail() {

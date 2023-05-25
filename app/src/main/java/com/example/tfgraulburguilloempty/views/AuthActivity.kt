@@ -10,6 +10,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.helper.widget.MotionEffect.TAG
 import com.example.tfgraulburguilloempty.R
+import com.example.tfgraulburguilloempty.views.model.Jugador
+import com.example.tfgraulburguilloempty.views.model.Player
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -175,6 +177,7 @@ class AuthActivity : AppCompatActivity(){
             val userData = hashMapOf(
                 "photoUrl" to photoUrl
             )
+        }
 
 
             db.collection("users").document(user["email"]!!)
@@ -185,7 +188,7 @@ class AuthActivity : AppCompatActivity(){
                     // Crear la colección "JugadoresFav" dentro del documento de usuario
                     val jugadoresFav: MutableMap<String, Any> = HashMap()
                     db.collection("users").document(docuemntemail!!).collection("JugadoresFav")
-                        .document("favoritos")
+                        .document()
                         .set(jugadoresFav)
                         .addOnSuccessListener {
                             // Colección "JugadoresFav" creada exitosamente
@@ -199,7 +202,7 @@ class AuthActivity : AppCompatActivity(){
                 .addOnFailureListener(OnFailureListener { e ->
                     Log.w(TAG, "Error adding document", e)
                 })
-        }
+
     }
 
     private fun addDataGoogle() {
@@ -226,8 +229,7 @@ class AuthActivity : AppCompatActivity(){
 
                     // Crear la colección "JugadoresFav" dentro del documento de usuario
                     val jugadoresFav: MutableMap<String, Any> = HashMap()
-                    db.collection("users").document(email).collection("JugadoresFav")
-                        .document("favoritos")
+                    db.collection("users").document(email).collection("JugadoresFav").document()
                         .set(jugadoresFav)
                         .addOnSuccessListener {
                             // Colección "JugadoresFav" creada exitosamente
@@ -250,7 +252,7 @@ class AuthActivity : AppCompatActivity(){
         user["email"] = EmaileditText.text.toString()
         user["password"] = PasswordeditText.text.toString()
         db.collection("users").document(user["email"]!!)
-            .update(user as Map<String, String>)
+            .update(user as Map<String, Any>)
             .addOnSuccessListener{ documentReference ->
                 Log.d(TAG,"DocumentSnapshot added with ID: " + documentReference)
             }
