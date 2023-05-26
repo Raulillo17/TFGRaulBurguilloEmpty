@@ -111,17 +111,19 @@ class PlayersDetailActivity : AppCompatActivity() {
 
         fabjugador.setOnClickListener {
             if (buttonColor == Color.BLUE) {
-                JugadoresFav.add(jugador)
+                JugadoresFav.document(jugador.lastName!!).set(jugador)
                     .addOnSuccessListener { documentReference ->
-                        Log.d(TAG, "Jugador favorito añadido con ID: ${documentReference.id}")
+                        fabjugador.setBackgroundColor(Color.RED)
+                        Log.d(TAG, "Jugador favorito añadido")
                     }
                     .addOnFailureListener { e ->
                         Log.w(TAG, "Error al añadir el jugador favorito", e)
                     }
                 msg("Has añadido a ${jugador.firstName + " " + jugador.lastName} a favoritos" )
             }else{
-                JugadoresFav.document().delete()
+                JugadoresFav.document(jugador.lastName!!).delete()
                     .addOnSuccessListener {
+                        fabjugador.setBackgroundColor(Color.BLUE)
                         Log.d(TAG, "Jugador eliminado")
                     }
                     .addOnFailureListener {
