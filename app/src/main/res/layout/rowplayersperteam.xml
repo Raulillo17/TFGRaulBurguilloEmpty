@@ -67,6 +67,7 @@
             android:id="@+id/tvPosicionarellenarPerTeam"
             android:layout_width="104dp"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:layout_marginBottom="35dp"
             android:text="TextView"
             card_view:layout_constraintBottom_toBottomOf="parent"

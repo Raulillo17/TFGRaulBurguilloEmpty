@@ -83,12 +83,12 @@ enum class Conference(val value: String) {
 }
 
 data class Jugador(
-    val lastName: String,
-    val careerPoints: Double,
-    val careerRebounds: Double,
-    val carrerAssists: Double,
-    val headShotURL: String ,
-    val team: String
+    val lastName: String? = null,
+    val careerPoints: Double = 0.0,
+    val careerRebounds: Double = 0.0,
+    val carrerAssists: Double = 0.0,
+    val headShotURL: String? = null,
+    val team: String? = null,
 )
 
 data class Respuesta(

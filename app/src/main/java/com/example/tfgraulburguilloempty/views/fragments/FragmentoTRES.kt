@@ -124,14 +124,14 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
                 val itemList = ArrayList<Jugador>()
                 for (document in querySnapshot) {
                     // Acceder a los datos de cada jugador favorito
-                    lastname = document.getString("lastName").toString()
-                    nombreequipo = document.getString("team").toString()
+                    lastname = document.getString("lastName")!!
+                    nombreequipo = document.getString("team")!!
                     ppg = document.getDouble("careerPoints")!!
                     apg = document.getDouble("carrerAssists")!!
                     rpg = document.getDouble("careerRebounds")!!
-                    imagen = document.getString("headShotURL").toString()
+                    imagen = document.getString("headShotURL")!!
 
-                    val jugador = Jugador(lastname!!, ppg!!, apg!!, rpg!!, imagen!!, nombreequipo)
+                    val jugador = Jugador(lastname, ppg, apg, rpg, imagen, nombreequipo)
                     // ... acceder a otros datos necesarios
 
                     // Agrega el objeto Item a la lista

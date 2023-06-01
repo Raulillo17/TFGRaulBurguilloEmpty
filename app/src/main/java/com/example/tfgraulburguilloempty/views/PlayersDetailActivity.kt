@@ -104,7 +104,7 @@ class PlayersDetailActivity : AppCompatActivity() {
                         // El jugador existe en la colección
                         Log.d(TAG, "El jugador existe y cambiamos el color")
                         fabjugador.setImageResource(R.drawable.estrella)
-                        fabjugador.backgroundTintList = ColorStateList.valueOf(Color.YELLOW)
+                        //fabjugador.backgroundTintList = ColorStateList.valueOf(Color.YELLOW)
                         jugadorEncontrado = true
                         break
                     }
@@ -114,7 +114,7 @@ class PlayersDetailActivity : AppCompatActivity() {
                     // El jugador no existe en la colección
                     Log.d(TAG, "El jugador no existe")
                     fabjugador.setImageResource(R.drawable.favoritoapagado)
-                    fabjugador.backgroundTintList = ColorStateList.valueOf(Color.BLUE)
+                    //fabjugador.backgroundTintList = ColorStateList.valueOf(Color.CYAN)
                     jugadorEncontrado = false
                 }
             }
@@ -130,7 +130,7 @@ class PlayersDetailActivity : AppCompatActivity() {
                 JugadoresFav.document(jugador.lastName.toString()).set(jugador)
                     .addOnSuccessListener { documentReference ->
                         fabjugador.setImageResource(R.drawable.estrella)
-                        fabjugador.backgroundTintList = ColorStateList.valueOf(Color.YELLOW)
+                        //fabjugador.backgroundTintList = ColorStateList.valueOf(Color.YELLOW)
                         jugadorEncontrado = true
                         Log.d(TAG, "Jugador favorito añadido")
                     }
@@ -142,7 +142,7 @@ class PlayersDetailActivity : AppCompatActivity() {
                 JugadoresFav.document(jugador.lastName.toString()).delete()
                     .addOnSuccessListener {
                         fabjugador.setImageResource(R.drawable.favoritoapagado)
-                        fabjugador.backgroundTintList = ColorStateList.valueOf(Color.BLUE)
+                        //fabjugador.backgroundTintList = ColorStateList.valueOf(Color.CYAN)
                         jugadorEncontrado = false
                         Log.d(TAG, "Jugador eliminado")
                     }

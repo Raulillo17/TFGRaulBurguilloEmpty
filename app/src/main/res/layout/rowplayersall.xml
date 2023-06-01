@@ -79,6 +79,7 @@
             android:id="@+id/tvPosicionarellenarAll"
             android:layout_width="104dp"
             android:layout_height="20dp"
+            android:layout_marginStart="5dp"
             android:text="TextView"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toStartOf="@+id/tvEdad"
