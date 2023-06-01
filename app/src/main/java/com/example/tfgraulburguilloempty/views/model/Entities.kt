@@ -37,7 +37,8 @@ data class Player (
     @SerializedName("headShotUrl")
     val headShotURL: String? = null,
     val dateLastUpdated: String? = null
-)  : Serializable
+)  : Serializable {
+}
 
 
 enum class Height(val value: String) {
@@ -82,11 +83,12 @@ enum class Conference(val value: String) {
 }
 
 data class Jugador(
-    val lastName: String? = null,
+    val lastName: String,
     val careerPoints: Double,
     val careerRebounds: Double,
     val carrerAssists: Double,
-    val headShotURL: String? = null,
+    val headShotURL: String ,
+    val team: String
 )
 
 data class Respuesta(

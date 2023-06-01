@@ -10,7 +10,7 @@
         android:title="Jugadores" />
     <item
         android:id="@+id/navigation_tres"
-        android:icon="@drawable/favorito"
+        android:icon="@drawable/estrella"
         android:title="Jugadores Favoritos" />
     <item
         android:id="@+id/action_logout"

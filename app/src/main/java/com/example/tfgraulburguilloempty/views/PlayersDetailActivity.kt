@@ -1,6 +1,8 @@
 package com.example.tfgraulburguilloempty.views
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -27,6 +29,7 @@ import com.squareup.picasso.Picasso
 
 class PlayersDetailActivity : AppCompatActivity() {
 
+    private var jugadorEncontrado = false
     private lateinit var emailapasar: String
     private lateinit var nombredelEquipo: String
     private lateinit var colorFondo: View
@@ -75,86 +78,89 @@ class PlayersDetailActivity : AppCompatActivity() {
         jugador = intent.getSerializableExtra("jugador") as Player
         equipo = intent.getSerializableExtra("equipo") as Team
         emailapasar = intent.getSerializableExtra("emailapasar") as String
+        jugadorEncontrado = false
 
         title = "${jugador.firstName + "  " + jugador.team}"
 
         val db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
         val collectionRef = db.collection("users")
         val documentRef = collectionRef.document(emailapasar)
-        val JugadoresFav = documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
+        val JugadoresFav =
+            documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
         val fabjugador = findViewById<FloatingActionButton>(R.id.fab)
+        val drawable = fabjugador.drawable
         // Obtén el color de fondo actual del botón FAB
         val buttonColor = fabjugador.backgroundTintList?.defaultColor
 
-
         //Comprobamos si el jugador esta en favorito o no para cambiar el color del boton
         JugadoresFav.get()
-            .addOnSuccessListener{ snapshot ->
-            if (snapshot != null) {
-                for (document in snapshot.documents) {
-                    // Compara el objeto en cada documento con el objeto buscado
-                    if (document.getString("id") == jugador.id.toString()) {
-                        // El objeto está presente en la colección
-                        Log.d(TAG, "El jugador existe y cambiamos el color")
-                        fabjugador.setBackgroundColor(Color.RED)
-                        break
-                    }else{
-                        Log.d(TAG, "El jugador no existe ")
-                        fabjugador.setBackgroundColor(Color.BLUE)
-                    }
+            .addOnSuccessListener { snapshot ->
 
+                for (document in snapshot.documents) {
+                    val lastName = document.getString("lastName")
+
+                    // Compara el valor de "lastName" con el jugador buscado
+                    if (lastName == jugador.lastName.toString()) {
+                        // El jugador existe en la colección
+                        Log.d(TAG, "El jugador existe y cambiamos el color")
+                        fabjugador.setImageResource(R.drawable.estrella)
+                        fabjugador.backgroundTintList = ColorStateList.valueOf(Color.YELLOW)
+                        jugadorEncontrado = true
+                        break
+                    }
+                }
+
+                if (!jugadorEncontrado) {
+                    // El jugador no existe en la colección
+                    Log.d(TAG, "El jugador no existe")
+                    fabjugador.setImageResource(R.drawable.favoritoapagado)
+                    fabjugador.backgroundTintList = ColorStateList.valueOf(Color.BLUE)
+                    jugadorEncontrado = false
                 }
             }
-        }
+            .addOnFailureListener { exception ->
+                // Manejar el error al obtener los datos desde Firebase
+                Log.e(TAG, "Error al obtener los datos: ${exception.message}")
 
-        showDetail()
+            }
+
 
         fabjugador.setOnClickListener {
-            if (buttonColor == Color.BLUE) {
-                JugadoresFav.document(jugador.lastName!!).set(jugador)
+            if (!jugadorEncontrado){
+                JugadoresFav.document(jugador.lastName.toString()).set(jugador)
                     .addOnSuccessListener { documentReference ->
-                        fabjugador.setBackgroundColor(Color.RED)
+                        fabjugador.setImageResource(R.drawable.estrella)
+                        fabjugador.backgroundTintList = ColorStateList.valueOf(Color.YELLOW)
+                        jugadorEncontrado = true
                         Log.d(TAG, "Jugador favorito añadido")
                     }
                     .addOnFailureListener { e ->
                         Log.w(TAG, "Error al añadir el jugador favorito", e)
                     }
-                msg("Has añadido a ${jugador.firstName + " " + jugador.lastName} a favoritos" )
-            }else{
-                JugadoresFav.document(jugador.lastName!!).delete()
+                msg("Has añadido a ${jugador.firstName + " " + jugador.lastName} a favoritos")
+            } else if (jugadorEncontrado){
+                JugadoresFav.document(jugador.lastName.toString()).delete()
                     .addOnSuccessListener {
-                        fabjugador.setBackgroundColor(Color.BLUE)
+                        fabjugador.setImageResource(R.drawable.favoritoapagado)
+                        fabjugador.backgroundTintList = ColorStateList.valueOf(Color.BLUE)
+                        jugadorEncontrado = false
                         Log.d(TAG, "Jugador eliminado")
                     }
                     .addOnFailureListener {
                         Log.w(TAG, "Error al eliminar el jugador favorito")
                     }
-                msg("Has eliminado a ${jugador.firstName + " " + jugador.lastName} de favoritos" )
+                msg("Has eliminado a ${jugador.firstName + " " + jugador.lastName} de favoritos")
             }
-            }
-
-
-
-/*            if (jugador.equals(jugador.id))
-            JugadoresFav.add(jugador)
-                .addOnSuccessListener { documentReference ->
-                    Log.d(TAG, "Jugador favorito añadido con ID: ${documentReference.id}")
-                }
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error al añadir el jugador favorito", e)
-                }
-            msg("Has añadido a ${jugador.firstName + " " + jugador.lastName} a favoritos" )*/
-
-
-
         }
+        showDetail()
+
+    }
 
 
-    @SuppressLint("ResourceAsColor")
     private fun showDetail() {
         tvJersey.text = jugador.jerseyNumber
         tvPuntosDetail.text = jugador.careerPoints.toString()
-        tvAsistenciasDetail.text  =jugador.carrerAssists.toString()
+        tvAsistenciasDetail.text = jugador.carrerAssists.toString()
         tvRebotesDetail.text = jugador.careerRebounds.toString()
         tvCumpleaños.text = jugador.dateOfBirth
         tvPosicionDetail.text = jugador.position.toString()
@@ -164,54 +170,16 @@ class PlayersDetailActivity : AppCompatActivity() {
         tvPorT2.text = jugador.careerPercentageFieldGoal.toString()
         tvPorT1.text = jugador.careerPercentageFreethrow.toString()
         Picasso.get().load("${jugador.headShotURL}").into(ivPlayerDetail)
-        colorFondo.background = colorFondo(jugador.team)
+
 
         //jugador.team?.let { colorFondo(it) }
 
     }
 
-    @SuppressLint("ResourceAsColor")
-    private fun colorFondo(name: String?): Drawable? {
-        when (name) {
-            "Orlando Magic" -> colorFondo.setBackgroundColor(R.color.Orlando)
-            "Atlanta Hawks" -> colorFondo.setBackgroundColor(R.color.Atlanta)
-            "Boston Celtics" -> colorFondo.setBackgroundColor(R.color.Boston)
-            "Milwaukee Bucks" -> colorFondo.setBackgroundColor(R.color.Bucks)
-            "Chicago Bulls" -> colorFondo.setBackgroundColor(R.color.Bulls)
-            "Cleveland Cavaliers" -> colorFondo.setBackgroundColor(R.color.Cleveland)
-            "LA Clippers" -> colorFondo.setBackgroundColor(R.color.Clippers)
-            "New York Knicks" -> colorFondo.setBackgroundColor(R.color.Nicks)
-            "Dallas Mavericks" -> colorFondo.setBackgroundColor(R.color.Dallas)
-            "Denver Nuggets" -> colorFondo.setBackgroundColor(R.color.Denver)
-            "Detroit Pistons" -> colorFondo.setBackgroundColor(R.color.Detroit)
-            "Indiana Pacers" -> colorFondo.setBackgroundColor(R.color.Pacers)
-            "Philadelphia 76ers" -> colorFondo.setBackgroundColor(R.color.Phipadelphia)
-            "Memphis Grizzlies" -> colorFondo.setBackgroundColor(R.color.Memphis)
-            "Miami Heat" -> colorFondo.setBackgroundColor(R.color.Miami)
-            "Minnesota Timberwolves" -> colorFondo.setBackgroundColor(R.color.Minesota)
-            "Toronto Raptors" -> colorFondo.setBackgroundColor(R.color.Raptors)
-            "Houston Rockets" -> colorFondo.setBackgroundColor(R.color.Rockets)
-            "Golden State Warriors" -> colorFondo.setBackgroundColor(R.color.Warriors)
-            "Washington Wizards" -> colorFondo.setBackgroundColor(R.color.Wizards)
-            "Charlotte Hornets" -> colorFondo.setBackgroundColor(R.color.Hornets)
-            "Utah Jazz" -> colorFondo.setBackgroundColor(R.color.Jazz)
-            "Brooklyn Nets" -> colorFondo.setBackgroundColor(R.color.Nets)
-            "Oklahoma City Thunder" -> colorFondo.setBackgroundColor(R.color.Oklahoma)
-            "New Orleans Pelicans" -> colorFondo.setBackgroundColor(R.color.Orleans)
-            "Portland Trail Blazers" -> colorFondo.setBackgroundColor(R.color.Portland)
-            "Los Angeles Lakers" -> colorFondo.setBackgroundColor(R.color.Lakers)
-            "Sacramento Kings" -> colorFondo.setBackgroundColor(R.color.Sacramento)
-            "Phoenix Suns" -> colorFondo.setBackgroundColor(R.color.Suns)
-            "San Antonio Spurs" -> colorFondo.setBackgroundColor(R.color.Spurs)
-        }
-        return null
-    }
-
-
 
     private fun msg(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
-
-
 }
+
+

@@ -29,6 +29,12 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
+    private lateinit var imagen: String
+    private var rpg: Double  =0.0
+    private var apg: Double = 0.0
+    private var ppg :Double = 0.0
+    private lateinit var nombreequipo: String
+    private lateinit var lastname: String
     private lateinit var jugadores: List<Jugador>
     private lateinit var JugadoresFav: CollectionReference
     private lateinit var documentRef: DocumentReference
@@ -41,18 +47,7 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
     // Obtén una referencia al documento que contiene la colección anidada
     //val documentRef = FirebaseFirestore.getInstance().collection("users").document()
 
-    // Crea una lista para almacenar los datos de los elementos
-    val itemList = ArrayList<Jugador>()
 
-    companion object {
-        fun newInstance(emailapasar: String): FragmentoTRES {
-            val fragmento = FragmentoTRES()
-            val args = Bundle()
-            args.putString("emailapasar", emailapasar)
-            fragmento.arguments = args
-            return fragmento
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,27 +62,34 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
         val view = inflater.inflate(R.layout.fragment_fragmento_t_r_e_s, container, false)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbarJugadoresFav)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-       emailapasar = arguments?.getString("emailapasar")!!
-        db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
-        collectionRef = db.collection("users")
-        documentRef = collectionRef.document(emailapasar)
-        JugadoresFav = documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
+
+
         // Inflate the layout for this fragment
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Recuperamos el contenido desde la primera pantalla del email a pasar para meternos en su documento
+        val datosRecuperados = arguments
+        emailapasar = datosRecuperados!!.getString("emailapasar").toString()
+        Log.d("Raul", "Documento del email $emailapasar" )
+
+        db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
+
+/*        //Inicializamos la referencia a la collecion users
+        collectionRef = db.collection("users")
+
+        //hacemos referencia para meternos en el documento del usuario
+        documentRef = collectionRef.document(emailapasar)
+
+        // Inicializar la referencia a la colección de favoritos
+        JugadoresFav = documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos*/
+
+        JugadoresFav = db.collection("users").document(emailapasar).collection("JugadoresFav")
         getJugadoresFavFireBase()
         initRV()
     }
-
-    /*private fun initRV() {
-        rvPlayersFav  = requireView().findViewById<RecyclerView>(R.id.rvPlayersFav)
-        adapter = adapterJugadorFav(requireContext(),R.layout.rowplayersfav)
-        rvPlayersFav.adapter = adapter
-        rvPlayersFav.layoutManager = LinearLayoutManager(requireContext())
-    }*/
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -119,23 +121,24 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
     private fun getJugadoresFavFireBase() {
         JugadoresFav.get()
             .addOnSuccessListener { querySnapshot ->
+                val itemList = ArrayList<Jugador>()
                 for (document in querySnapshot) {
                     // Acceder a los datos de cada jugador favorito
-                    val nombreequipo = document.getString("team")
-                    val ppg = document.getDouble("careerPoints")
-                    val apg = document.getDouble("careerAssists")
-                    val rpg = document.getDouble("careerRebounds")
-                    val imagen = document.getString("headShotURL")
+                    lastname = document.getString("lastName").toString()
+                    nombreequipo = document.getString("team").toString()
+                    ppg = document.getDouble("careerPoints")!!
+                    apg = document.getDouble("carrerAssists")!!
+                    rpg = document.getDouble("careerRebounds")!!
+                    imagen = document.getString("headShotURL").toString()
 
-                    val jugador = Jugador(nombreequipo, ppg!!, apg!!, rpg!!, imagen)
+                    val jugador = Jugador(lastname!!, ppg!!, apg!!, rpg!!, imagen!!, nombreequipo)
                     // ... acceder a otros datos necesarios
 
                     // Agrega el objeto Item a la lista
                     itemList.add(jugador)
-
-                    // Hacer algo con los datos recuperados
-                    Log.d(TAG, "Jugador favorito: $nombreequipo")
                 }
+
+
                 // Notifica al adaptador que los datos han cambiado
                 adapter.setJugadoresFav(itemList)
             }

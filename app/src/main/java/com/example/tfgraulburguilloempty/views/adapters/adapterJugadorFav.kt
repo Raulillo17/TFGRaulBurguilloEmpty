@@ -49,7 +49,8 @@ class adapterJugadorFav(
             // itemview es el item de diseño
             // al que hay que poner los datos del objeto dataItem
 
-            val tvJugadorNombreFav = itemView.findViewById(R.id.tvJugadorNombreFav) as TextView
+            val tvNombreJugadorFavFireBase = itemView.findViewById(R.id.tvNombreJugadorFavFireBase) as TextView
+            val tvEquipoNombreJugadorFav = itemView.findViewById(R.id.tvEquipoNombreJugadorFav) as TextView
             val tvPPGFav = itemView.findViewById(R.id.tvPPGFav) as TextView
             val tvAPGFav = itemView.findViewById(R.id.tvAPGFav) as TextView
             val tvRPGFav = itemView.findViewById(R.id.tvRPGFav) as TextView
@@ -76,7 +77,8 @@ class adapterJugadorFav(
                 tvnombreTeamFav.text = dataItem.team
                 tvLastNameFav.text = dataItem.lastName*/
 
-                tvJugadorNombreFav.text = dataItem.lastName
+                tvNombreJugadorFavFireBase.text = dataItem.lastName
+                tvEquipoNombreJugadorFav.text = dataItem.team
                 tvPPGFav.text = dataItem.careerPoints.toString()
                 tvAPGFav.text = dataItem.carrerAssists.toString()
                 tvRPGFav.text = dataItem.careerRebounds.toString()

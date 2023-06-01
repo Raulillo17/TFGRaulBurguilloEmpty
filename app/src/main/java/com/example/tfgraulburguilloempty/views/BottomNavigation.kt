@@ -1,19 +1,18 @@
 package com.example.tfgraulburguilloempty.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.example.tfgraulburguilloempty.R
-import com.example.tfgraulburguilloempty.views.adapters.adapterPlayers
-import com.example.tfgraulburguilloempty.views.fragments.*
-import com.example.tfgraulburguilloempty.views.model.Player
+import com.example.tfgraulburguilloempty.views.fragments.FragmentList
+import com.example.tfgraulburguilloempty.views.fragments.FragmentLogOut
+import com.example.tfgraulburguilloempty.views.fragments.FragmentoDOS
+import com.example.tfgraulburguilloempty.views.fragments.FragmentoTRES
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -46,10 +45,14 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
             val provider = bundle?.getString("provider")
 
 
+
+
             if (email != null && provider != null) {
                 emailapasar = email
                 provideapasar = provider
             }
+
+
 
 
             //guardado de datos
@@ -81,6 +84,8 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
     }*/
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             var fragment: Fragment? = null
+            val datosAEnviar = Bundle()
+            datosAEnviar.putString("emailapasar", emailapasar)
             when (item.itemId) {
                 R.id.navigation_uno -> {
                     fragment = FragmentList()
@@ -89,18 +94,11 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
                     fragment = FragmentoDOS()
                 }
                 R.id.navigation_tres -> {
-
                     fragment = FragmentoTRES()
+                    fragment.setArguments(datosAEnviar);
 
                 }
                 R.id.action_logout -> {
-                    /*val emailTextView: TextView? = findViewById(R.id.tvEmailDetail)
-                    val providerTextView: TextView? = findViewById(R.id.tvProviderDeatil)
-                    if (emailTextView != null && providerTextView != null) {
-                        emailTextView.text = emailapasar
-                        providerTextView.text = provideapasar
-                    }*/
-                    //fragment.arguments
                     fragment = FragmentLogOut()
 
 
@@ -116,9 +114,7 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
         fragmentTransaction.commit()
     }
     private fun replaceFragment(fragment: Fragment) {
-        val args = Bundle()
-        args.putString("emailapasar", emailapasar)
-        fragment.arguments = args
+
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame, fragment)
         fragmentTransaction.commit()
