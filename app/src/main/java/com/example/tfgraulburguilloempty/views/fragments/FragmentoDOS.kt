@@ -54,6 +54,7 @@ class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun getJugadores() {
+
         viewModel.getJugadores().observe(viewLifecycleOwner, Observer { it ->
             it?.let{
                 players = it
@@ -64,6 +65,7 @@ class FragmentoDOS : Fragment(), SearchView.OnQueryTextListener {
         })
     }
     fun initRV() {
+
         rvPlayersAll  = requireView().findViewById<RecyclerView>(R.id.rvPlayersAll)
         adapter = adapterPlayers(requireContext(), R.layout.rowplayersall)
         rvPlayersAll.adapter = adapter

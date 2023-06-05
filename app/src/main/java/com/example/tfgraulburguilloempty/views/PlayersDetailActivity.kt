@@ -21,6 +21,7 @@ import com.example.tfgraulburguilloempty.databinding.ActivityPlayersBinding
 import com.example.tfgraulburguilloempty.databinding.ActivityPlayersDetailBinding
 import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
@@ -76,7 +77,7 @@ class PlayersDetailActivity : AppCompatActivity() {
         colorFondo = findViewById<View>(R.id.llDetail)
 
         jugador = intent.getSerializableExtra("jugador") as Player
-        equipo = intent.getSerializableExtra("equipo") as Team
+        //equipo = intent.getSerializableExtra("equipo") as Team
         emailapasar = intent.getSerializableExtra("emailapasar") as String
         jugadorEncontrado = false
 
@@ -87,8 +88,8 @@ class PlayersDetailActivity : AppCompatActivity() {
         val documentRef = collectionRef.document(emailapasar)
         val JugadoresFav =
             documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
-        val fabjugador = findViewById<FloatingActionButton>(R.id.fab)
-        val drawable = fabjugador.drawable
+        val fabjugador = findViewById<ExtendedFloatingActionButton>(R.id.fab)
+
         // Obtén el color de fondo actual del botón FAB
         val buttonColor = fabjugador.backgroundTintList?.defaultColor
 
@@ -103,7 +104,8 @@ class PlayersDetailActivity : AppCompatActivity() {
                     if (lastName == jugador.lastName.toString()) {
                         // El jugador existe en la colección
                         Log.d(TAG, "El jugador existe y cambiamos el color")
-                        fabjugador.setImageResource(R.drawable.estrella)
+                        fabjugador.setIconResource(R.drawable.estrella)
+                        fabjugador.text = "Añadido a Favoritos"
                         //fabjugador.backgroundTintList = ColorStateList.valueOf(Color.YELLOW)
                         jugadorEncontrado = true
                         break
@@ -113,7 +115,8 @@ class PlayersDetailActivity : AppCompatActivity() {
                 if (!jugadorEncontrado) {
                     // El jugador no existe en la colección
                     Log.d(TAG, "El jugador no existe")
-                    fabjugador.setImageResource(R.drawable.favoritoapagado)
+                    fabjugador.setIconResource(R.drawable.favoritoapagado)
+                    fabjugador.text = ""
                     //fabjugador.backgroundTintList = ColorStateList.valueOf(Color.CYAN)
                     jugadorEncontrado = false
                 }
@@ -129,7 +132,8 @@ class PlayersDetailActivity : AppCompatActivity() {
             if (!jugadorEncontrado){
                 JugadoresFav.document(jugador.lastName.toString()).set(jugador)
                     .addOnSuccessListener { documentReference ->
-                        fabjugador.setImageResource(R.drawable.estrella)
+                        fabjugador.setIconResource(R.drawable.estrella)
+                        fabjugador.text = "Añadido a Favoritos"
                         //fabjugador.backgroundTintList = ColorStateList.valueOf(Color.YELLOW)
                         jugadorEncontrado = true
                         Log.d(TAG, "Jugador favorito añadido")
@@ -141,7 +145,8 @@ class PlayersDetailActivity : AppCompatActivity() {
             } else if (jugadorEncontrado){
                 JugadoresFav.document(jugador.lastName.toString()).delete()
                     .addOnSuccessListener {
-                        fabjugador.setImageResource(R.drawable.favoritoapagado)
+                        fabjugador.setIconResource(R.drawable.favoritoapagado)
+                        fabjugador.text = ""
                         //fabjugador.backgroundTintList = ColorStateList.valueOf(Color.CYAN)
                         jugadorEncontrado = false
                         Log.d(TAG, "Jugador eliminado")

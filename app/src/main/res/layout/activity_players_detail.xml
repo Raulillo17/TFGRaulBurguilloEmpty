@@ -22,13 +22,15 @@
 
     <include layout="@layout/content_players_detail" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/favoritoapagado" />
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:icon="@drawable/estrella"
+        app:iconTint="@null"
+        app:rippleColor="@color/colorPrimaryDark" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

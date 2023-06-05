@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.databinding.ActivityPlayersBinding
 import com.example.tfgraulburguilloempty.views.adapters.adapterPlayerPerTeam
+import com.example.tfgraulburguilloempty.views.adapters.adapterPlayers
 import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.example.tfgraulburguilloempty.views.viewmodel.MainViewModel
@@ -106,7 +107,7 @@ class PlayersActivity : AppCompatActivity(), SearchView.OnQueryTextListener  {
         val jugador = v.tag as Player
         val intent = Intent(this, PlayersDetailActivity::class.java)
         intent.putExtra("jugador", jugador)
-        intent.putExtra("equipo", equipo)
+        //intent.putExtra("equipo", equipo)
         intent.putExtra("emailapasar", emailapasar)
         startActivity(intent)
 

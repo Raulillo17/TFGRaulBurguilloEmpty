@@ -75,19 +75,18 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
         emailapasar = datosRecuperados!!.getString("emailapasar").toString()
         Log.d("Raul", "Documento del email $emailapasar" )
 
+
+
         db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
-
-/*        //Inicializamos la referencia a la collecion users
         collectionRef = db.collection("users")
-
-        //hacemos referencia para meternos en el documento del usuario
         documentRef = collectionRef.document(emailapasar)
+        JugadoresFav =
+            documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
 
-        // Inicializar la referencia a la colección de favoritos
-        JugadoresFav = documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos*/
+        //JugadoresFav = db.collection("users").document(emailapasar).collection("JugadoresFav")
 
-        JugadoresFav = db.collection("users").document(emailapasar).collection("JugadoresFav")
-        getJugadoresFavFireBase()
+
+       // getJugadoresFavFireBase()
         initRV()
     }
 
@@ -118,11 +117,11 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
     }
 
 
-    private fun getJugadoresFavFireBase() {
+   /* private fun getJugadoresFavFireBase() {
         JugadoresFav.get()
             .addOnSuccessListener { querySnapshot ->
                 val itemList = ArrayList<Jugador>()
-                for (document in querySnapshot) {
+                for (document in querySnapshot.documents) {
                     // Acceder a los datos de cada jugador favorito
                     lastname = document.getString("lastName")!!
                     nombreequipo = document.getString("team")!!
@@ -146,7 +145,7 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
                 Log.w(TAG, "Error al recuperar los jugadores favoritos", exception)
             }
     }
-
+*/
     override fun onQueryTextSubmit(query: String?): Boolean {
         return false
     }

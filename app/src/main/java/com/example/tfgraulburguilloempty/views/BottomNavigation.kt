@@ -13,6 +13,7 @@ import com.example.tfgraulburguilloempty.views.fragments.FragmentList
 import com.example.tfgraulburguilloempty.views.fragments.FragmentLogOut
 import com.example.tfgraulburguilloempty.views.fragments.FragmentoDOS
 import com.example.tfgraulburguilloempty.views.fragments.FragmentoTRES
+import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -130,15 +131,25 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
 
     }
 
-/*    fun onClickPlayer(v: View){
+    fun onClickPlayer(v: View){
         val jugador = v.tag as Player
-        val equipo = v.tag as Team
         val intent = Intent(this, PlayersDetailActivity::class.java)
         intent.putExtra("jugador", jugador)
-        intent.putExtra("equipo", equipo)
+        intent.putExtra("emailapasar", emailapasar)
         startActivity(intent)
 
-    }*/
+    }
+
+    fun onClickPlayerFav(v: View){
+        val jugador = v.tag as Player
+        val intent = Intent(this, PlayersDetailActivity::class.java)
+        intent.putExtra("jugador", jugador)
+        intent.putExtra("emailapasar", emailapasar)
+        startActivity(intent)
+
+    }
+
+
 
     fun onClickLogOut(v: View){
         //borrado de datos
