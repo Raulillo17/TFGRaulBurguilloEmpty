@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.model.Jugador
+import com.example.tfgraulburguilloempty.views.model.Player
 import com.squareup.picasso.Picasso
 
 class adapterJugadorFav(
@@ -34,7 +35,7 @@ class adapterJugadorFav(
         return dataList.size
     }
 
-    internal fun setJugadoresFav(jugadores: ArrayList<Jugador>) {
+    internal fun setJugadoresFav(jugadores: List<Jugador>) {
         this.dataList = jugadores
         notifyDataSetChanged()
     }
@@ -85,38 +86,7 @@ class adapterJugadorFav(
 
                 Picasso.get().load("${dataItem.headShotURL}").into(ivJugadorFireBaseFav)
             }
-/*            when(dataItem.team){
-                "Orlando Magic" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Orlando)
-                "Atlanta Hawks" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Atlanta)
-                "Boston Celtics" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Boston)
-                "Milwaukee Bucks" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Bucks)
-                "Chicago Bulls" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Bulls)
-                "Cleveland Cavaliers" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Cleveland)
-                "LA Clippers" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Clippers)
-                "New York Knicks" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Nicks)
-                "Dallas Mavericks" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Dallas)
-                "Denver Nuggets" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Denver)
-                "Detroit Pistons" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Detroit)
-                "Indiana Pacers" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Pacers)
-                "Philadelphia 76ers" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Phipadelphia)
-                "Memphis Grizzlies" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Memphis)
-                "Miami Heat" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Miami)
-                "Minnesota Timberwolves" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Minesota)
-                "Toronto Raptors" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Raptors)
-                "Houston Rockets" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Rockets)
-                "Golden State Warriors" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Warriors)
-                "Washington Wizards" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Wizards)
-                "Charlotte Hornets" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Hornets)
-                "Utah Jazz" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Jazz)
-                "Brooklyn Nets" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Nets)
-                "Oklahoma City Thunder" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Oklahoma)
-                "New Orleans Pelicans" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Orleans)
-                "Portland Trail Blazers" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Portland)
-                "Los Angeles Lakers" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Lakers)
-                "Sacramento Kings" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Sacramento)
-                "Phoenix Suns" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Suns)
-                "San Antonio Spurs" -> (itemView as ConstraintLayout).setBackgroundColor(R.color.Spurs)
-            }*/
+
 
 
 

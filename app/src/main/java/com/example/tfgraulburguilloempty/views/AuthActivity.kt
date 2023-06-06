@@ -255,8 +255,8 @@ class AuthActivity : AppCompatActivity(){
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference)
 
-                    // Crear la colección "JugadoresFav" dentro del documento de usuario
-/*                    val jugadoresFav: MutableMap<String, Any> = HashMap()
+                    /*// Crear la colección "JugadoresFav" dentro del documento de usuario
+                    val jugadoresFav: MutableMap<String, Any> = HashMap()
                     db.collection("users").document(email).collection("JugadoresFav")
                         .document()
                         .set(jugadoresFav)

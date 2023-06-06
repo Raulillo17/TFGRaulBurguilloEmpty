@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.views.adapters.adapterJugadorFav
 import com.example.tfgraulburguilloempty.views.model.Jugador
-import com.example.tfgraulburguilloempty.views.model.Player
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,6 +28,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
+    private lateinit var searchView: SearchView
     private lateinit var imagen: String
     private var rpg: Double  =0.0
     private var apg: Double = 0.0
@@ -80,13 +80,12 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
         db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
         collectionRef = db.collection("users")
         documentRef = collectionRef.document(emailapasar)
-        JugadoresFav =
-            documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
+        JugadoresFav = documentRef.collection("JugadoresFav") // Inicializar la referencia a la colección de favoritos
 
         //JugadoresFav = db.collection("users").document(emailapasar).collection("JugadoresFav")
 
 
-       // getJugadoresFavFireBase()
+        getJugadoresFavFireBase()
         initRV()
     }
 
@@ -94,9 +93,9 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         val searchItem = menu.findItem(R.id.action_search)
-/*       searchView = searchItem?.actionView as SearchView
+        searchView = searchItem?.actionView as SearchView
         searchView?.setQueryHint("Search...")
-        searchView?.setOnQueryTextListener(this)*/
+        searchView?.setOnQueryTextListener(this)
 
     }
 
@@ -117,10 +116,10 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
     }
 
 
-   /* private fun getJugadoresFavFireBase() {
+    private fun getJugadoresFavFireBase() {
         JugadoresFav.get()
             .addOnSuccessListener { querySnapshot ->
-                val itemList = ArrayList<Jugador>()
+                val listajugadoresfav = ArrayList<Jugador>()
                 for (document in querySnapshot.documents) {
                     // Acceder a los datos de cada jugador favorito
                     lastname = document.getString("lastName")!!
@@ -134,18 +133,18 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
                     // ... acceder a otros datos necesarios
 
                     // Agrega el objeto Item a la lista
-                    itemList.add(jugador)
+                    listajugadoresfav.add(jugador)
                 }
 
 
                 // Notifica al adaptador que los datos han cambiado
-                adapter.setJugadoresFav(itemList)
+                jugadores = listajugadoresfav
+                adapter.setJugadoresFav(listajugadoresfav)
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error al recuperar los jugadores favoritos", exception)
             }
     }
-*/
     override fun onQueryTextSubmit(query: String?): Boolean {
         return false
     }
@@ -154,7 +153,7 @@ class FragmentoTRES : Fragment(), SearchView.OnQueryTextListener {
         val original = ArrayList<Jugador>(jugadores)
         adapter.setJugadoresFav(original.filter { jugador ->
             jugador.lastName?.contains(query.toString(), true) ?: false
-        } as ArrayList<Jugador>)
+        })
         return false
     }
 

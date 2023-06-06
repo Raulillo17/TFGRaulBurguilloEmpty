@@ -66,39 +66,7 @@ class adapterTeams(
             tvnombrecategoria.text = dataItem.name
             tvRecord.text = dataItem.record
             tvConferencia.text = dataItem.conference.toString()*/
-/*            when(dataItem.name){
-                "Orlando Magic" -> (itemView as LinearLayout).setBackgroundColor(R.color.Orlando)
-                "Atlanta Hawks" -> (itemView as LinearLayout).setBackgroundColor(R.color.Atlanta)
-                "Boston Celtics" -> (itemView as LinearLayout).setBackgroundColor(R.color.Boston)
-                "Milwaukee Bucks" -> (itemView as LinearLayout).setBackgroundColor(R.color.Bucks)
-                "Chicago Bulls" -> (itemView as LinearLayout).setBackgroundColor(R.color.Bulls)
-                "Cleveland Cavaliers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Cleveland)
-                "LA Clippers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Clippers)
-                "New York Knicks" -> (itemView as LinearLayout).setBackgroundColor(R.color.Nicks)
-                "Dallas Mavericks" -> (itemView as LinearLayout).setBackgroundColor(R.color.Dallas)
-                "Denver Nuggets" -> (itemView as LinearLayout).setBackgroundColor(R.color.Denver)
-                "Detroit Pistons" -> (itemView as LinearLayout).setBackgroundColor(R.color.Detroit)
-                "Indiana Pacers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Pacers)
-                "Philadelphia 76ers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Phipadelphia)
-                "Memphis Grizzlies" -> (itemView as LinearLayout).setBackgroundColor(R.color.Memphis)
-                "Miami Heat" -> (itemView as LinearLayout).setBackgroundColor(R.color.Miami)
-                "Minnesota Timberwolves" -> (itemView as LinearLayout).setBackgroundColor(R.color.Minesota)
-                "Toronto Raptors" -> (itemView as LinearLayout).setBackgroundColor(R.color.Raptors)
-                "Houston Rockets" -> (itemView as LinearLayout).setBackgroundColor(R.color.Rockets)
-                "Golden State Warriors" -> (itemView as LinearLayout).setBackgroundColor(R.color.Warriors)
-                "Washington Wizards" -> (itemView as LinearLayout).setBackgroundColor(R.color.Wizards)
-                "Charlotte Hornets" -> (itemView as LinearLayout).setBackgroundColor(R.color.Hornets)
-                "Utah Jazz" -> (itemView as LinearLayout).setBackgroundColor(R.color.Jazz)
-                "Brooklyn Nets" -> (itemView as LinearLayout).setBackgroundColor(R.color.Nets)
-                "Oklahoma City Thunder" -> (itemView as LinearLayout).setBackgroundColor(R.color.Oklahoma)
-                "New Orleans Pelicans" -> (itemView as LinearLayout).setBackgroundColor(R.color.Orleans)
-                "Portland Trail Blazers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Portland)
-                "Los Angeles Lakers" -> (itemView as LinearLayout).setBackgroundColor(R.color.Lakers)
-                "Sacramento Kings" -> (itemView as LinearLayout).setBackgroundColor(R.color.Sacramento)
-                "Phoenix Suns" -> (itemView as LinearLayout).setBackgroundColor(R.color.Suns)
-                "San Antonio Spurs" -> (itemView as LinearLayout).setBackgroundColor(R.color.Spurs)
 
-            }*/
 
 
 

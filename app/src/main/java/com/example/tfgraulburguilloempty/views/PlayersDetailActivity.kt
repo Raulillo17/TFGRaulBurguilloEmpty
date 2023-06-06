@@ -19,6 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.example.tfgraulburguilloempty.R
 import com.example.tfgraulburguilloempty.databinding.ActivityPlayersBinding
 import com.example.tfgraulburguilloempty.databinding.ActivityPlayersDetailBinding
+import com.example.tfgraulburguilloempty.views.model.Jugador
 import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -30,6 +31,7 @@ import com.squareup.picasso.Picasso
 
 class PlayersDetailActivity : AppCompatActivity() {
 
+    private lateinit var jugadorFav: Any
     private var jugadorEncontrado = false
     private lateinit var emailapasar: String
     private lateinit var nombredelEquipo: String
@@ -76,7 +78,9 @@ class PlayersDetailActivity : AppCompatActivity() {
         ivPlayerDetail = findViewById<ImageView>(R.id.ivPlayerDetail)
         colorFondo = findViewById<View>(R.id.llDetail)
 
+
         jugador = intent.getSerializableExtra("jugador") as Player
+
         //equipo = intent.getSerializableExtra("equipo") as Team
         emailapasar = intent.getSerializableExtra("emailapasar") as String
         jugadorEncontrado = false
@@ -134,30 +138,59 @@ class PlayersDetailActivity : AppCompatActivity() {
 
 
         fabjugador.setOnClickListener {
-            JugadoresFav.get().addOnCompleteListener(){
-                    task ->
-                if (task.isSuccessful) {
-                    val exists = !task.result?.isEmpty!! ?: true
-                    if (!exists) {
-                        // La subcolección JugadoresFav no existe, así que la creamos
-                        val jugadoresFavData = hashMapOf<String, Any>()
+            if (emailapasar != null) {
+                val jugadoresFavRef = FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(emailapasar)
+                    .collection("JugadoresFav")
 
-                        JugadoresFav.document().set(jugadoresFavData)
-                            .addOnSuccessListener {
-                                // Subcolección creada exitosamente
-                                Log.d(TAG, "Subcolección JugadoresFav creada exitosamente")
+                jugadoresFavRef.whereEqualTo("jugadorId", jugador.id)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        if (querySnapshot.isEmpty && !jugadorEncontrado) {
+                            // El jugador no está en la subcolección, agregarlo
+                            jugadoresFavRef.add(jugador)
+                                .addOnSuccessListener {
+                                    fabjugador.setIconResource(R.drawable.estrella)
+                                    fabjugador.text = "Añadido a Favoritos"
+                                    //fabjugador.backgroundTintList = ColorStateList.valueOf(Color.YELLOW)
+                                    jugadorEncontrado = true
+                                    // Jugador agregado exitosamente
+                                    Toast.makeText(this, "Jugador agregado a favoritos", Toast.LENGTH_SHORT).show()
+                                }
+                                .addOnFailureListener { e ->
+                                    // Error al agregar el jugador
+                                    Log.e(TAG, "Error al agregar el jugador a favoritos", e)
+                                    Toast.makeText(this, "Error al agregar el jugador a favoritos", Toast.LENGTH_SHORT).show()
+                                }
+                        } else {
+                            // El jugador ya está en la subcolección, eliminarlo
+                            for (document in querySnapshot.documents) {
+                                jugadoresFavRef.document(document.id)
+                                    .delete()
+                                    .addOnSuccessListener {
+                                        fabjugador.setIconResource(R.drawable.favoritoapagado)
+                                        fabjugador.text = ""
+                                        //fabjugador.backgroundTintList = ColorStateList.valueOf(Color.CYAN)
+                                        jugadorEncontrado = false
+                                        // Jugador eliminado exitosamente
+                                        Toast.makeText(this, "Jugador eliminado de favoritos", Toast.LENGTH_SHORT).show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        // Error al eliminar el jugador
+                                        Log.e(TAG, "Error al eliminar el jugador de favoritos", e)
+                                        Toast.makeText(this, "Error al eliminar el jugador de favoritos", Toast.LENGTH_SHORT).show()
+                                    }
                             }
-                            .addOnFailureListener { e ->
-                                // Error al crear la subcolección JugadoresFav
-                                Log.w(TAG, "Error al crear la subcolección JugadoresFav", e)
-                            }
+                        }
                     }
-                } else {
-                    // Error al obtener la subcolección JugadoresFav
-                    Log.w(TAG, "Error al obtener la subcolección JugadoresFav", task.exception)
-                }
+                    .addOnFailureListener { exception ->
+                        // Error al consultar la subcolección
+                        Log.e(TAG, "Error al consultar la subcolección JugadoresFav", exception)
+                        Toast.makeText(this, "Error al consultar la subcolección JugadoresFav", Toast.LENGTH_SHORT).show()
+                    }
             }
-            if (!jugadorEncontrado){
+            /*if (!jugadorEncontrado){
                 JugadoresFav.document(jugador.lastName.toString()).set(jugador)
                     .addOnSuccessListener { documentReference ->
                         fabjugador.setIconResource(R.drawable.estrella)
@@ -183,7 +216,7 @@ class PlayersDetailActivity : AppCompatActivity() {
                         Log.w(TAG, "Error al eliminar el jugador favorito")
                     }
                 msg("Has eliminado a ${jugador.firstName + " " + jugador.lastName} de favoritos")
-            }
+            }*/
         }
 
 

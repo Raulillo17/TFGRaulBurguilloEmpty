@@ -13,6 +13,7 @@ import com.example.tfgraulburguilloempty.views.fragments.FragmentList
 import com.example.tfgraulburguilloempty.views.fragments.FragmentLogOut
 import com.example.tfgraulburguilloempty.views.fragments.FragmentoDOS
 import com.example.tfgraulburguilloempty.views.fragments.FragmentoTRES
+import com.example.tfgraulburguilloempty.views.model.Jugador
 import com.example.tfgraulburguilloempty.views.model.Player
 import com.example.tfgraulburguilloempty.views.model.Team
 import com.google.android.material.bottomnavigation.BottomNavigationView

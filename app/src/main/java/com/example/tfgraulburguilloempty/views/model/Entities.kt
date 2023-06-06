@@ -37,8 +37,7 @@ data class Player (
     @SerializedName("headShotUrl")
     val headShotURL: String? = null,
     val dateLastUpdated: String? = null
-)  : Serializable {
-}
+)  : Serializable
 
 
 enum class Height(val value: String) {
