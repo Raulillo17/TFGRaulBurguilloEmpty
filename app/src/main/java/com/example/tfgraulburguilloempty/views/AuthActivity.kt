@@ -1,11 +1,15 @@
 package com.example.tfgraulburguilloempty.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.helper.widget.MotionEffect.TAG
@@ -27,7 +31,10 @@ import com.google.firebase.ktx.Firebase
 
 
 
+
+
 class AuthActivity : AppCompatActivity(){
+    private lateinit var showPasswordButton: ImageButton
     private lateinit var googlebutton: Button
     private lateinit var PasswordeditText: EditText
     private lateinit var EmaileditText: EditText
@@ -37,6 +44,7 @@ class AuthActivity : AppCompatActivity(){
     private val GOOGLE_SIGN_IN = 100
     var db = FirebaseFirestore.getInstance()
     val user = FirebaseAuth.getInstance().currentUser
+
 
 
 
@@ -51,10 +59,13 @@ class AuthActivity : AppCompatActivity(){
         EmaileditText = findViewById<EditText>(R.id.EmaileditText)
         PasswordeditText = findViewById<EditText>(R.id.PasswordeditText)
         googlebutton = findViewById<Button>(R.id.googlebutton)
+        showPasswordButton = findViewById<ImageButton>(R.id.showPasswordButton)
         analytics = Firebase.analytics
         title = "Autentificación"
         setUp()
         session()
+
+
 
     }
 
@@ -70,6 +81,22 @@ class AuthActivity : AppCompatActivity(){
     }
 
     private fun setUp() {
+
+
+        showPasswordButton.setOnClickListener {
+            val isPasswordVisible =
+                PasswordeditText.transformationMethod == HideReturnsTransformationMethod.getInstance()
+            if (isPasswordVisible) {
+                // Ocultar contraseña
+                PasswordeditText.transformationMethod = PasswordTransformationMethod.getInstance()
+                showPasswordButton.setImageResource(R.drawable.ic_ojoabierto)
+            } else {
+                // Mostrar contraseña
+                PasswordeditText.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+                showPasswordButton.setImageResource(R.drawable.ic_invisible)
+            }
+        }
 
         ResgisterButton.setOnClickListener {
             if (EmaileditText.text.isNotEmpty() && PasswordeditText.text.isNotEmpty()) {
@@ -115,11 +142,12 @@ class AuthActivity : AppCompatActivity(){
             googleClient.signOut()
 
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
-            addDataGoogle()
+
         }
 
 
     }
+
 
     private fun showAlert() {
         val builder = AlertDialog.Builder(this)
@@ -149,7 +177,7 @@ class AuthActivity : AppCompatActivity(){
 
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
                         if (it.isSuccessful){
-                            addData()
+                            addDataGoogle()
                             showTeamsActivity(cuenta.email ?: "", ProviderType.GOOGLE)
 
                         }else{
@@ -165,29 +193,29 @@ class AuthActivity : AppCompatActivity(){
     }
 
     private fun addData() {
-        val user: MutableMap<String, String> = HashMap() // diccionario key value
-        val googleSignInAccount = GoogleSignIn.getLastSignedInAccount(applicationContext)
-        val photoUrl = googleSignInAccount?.photoUrl?.toString()
+        //val user: MutableMap<String, String> = HashMap() // diccionario key value
 
-        user["email"] = EmaileditText.text.toString()
-        user["password"] = PasswordeditText.text.toString()
-        val docuemntemail = user["email"]
+        //user["email"] = EmaileditText.text.toString()
+        //user["password"] = PasswordeditText.text.toString()
 
-        if (photoUrl != null) {
-            val userData = hashMapOf(
-                "photoUrl" to photoUrl
-            )
-        }
+        //val email = user["email"].toString()
 
+        val email = EmaileditText.text.toString().trim()
+        val password = PasswordeditText.text.toString()
 
-            db.collection("users").document(user["email"]!!)
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            val user: MutableMap<String, String> = HashMap()
+            user["email"] = email
+            user["password"] = password
+
+            db.collection("users").document(email)
                 .set(user)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference)
 
                     // Crear la colección "JugadoresFav" dentro del documento de usuario
-                    val jugadoresFav: MutableMap<String, Any> = HashMap()
-                    db.collection("users").document(docuemntemail!!).collection("JugadoresFav")
+                    /*val jugadoresFav: MutableMap<String, Any> = HashMap()
+                    db.collection("users").document(email).collection("JugadoresFav")
                         .document()
                         .set(jugadoresFav)
                         .addOnSuccessListener {
@@ -197,27 +225,27 @@ class AuthActivity : AppCompatActivity(){
                         .addOnFailureListener { e ->
                             // Error al crear la colección "JugadoresFav"
                             Log.w(TAG, "Error al crear la colección JugadoresFav", e)
-                        }
+                        }*/
                 }
                 .addOnFailureListener(OnFailureListener { e ->
                     Log.w(TAG, "Error adding document", e)
                 })
 
+        }
     }
 
     private fun addDataGoogle() {
        /* val user: MutableMap<String, String> = HashMap() // diccionario key value*/
         val googleSignInAccount = GoogleSignIn.getLastSignedInAccount(applicationContext)
         val photoUrl = googleSignInAccount?.photoUrl?.toString()
-       /* user["email"] = EmaileditText.text.toString()
-        user["password"] = PasswordeditText.text.toString()*/
-        val name = googleSignInAccount?.displayName
+        val password = googleSignInAccount?.displayName
         val email = googleSignInAccount?.email
 
-        if (photoUrl != null && name != null && email != null) {
+
+        if (photoUrl != null && password != null && email != null) {
             val userData = hashMapOf(
-                "photoUrl" to photoUrl,
-                "name" to name,
+                "foto" to photoUrl,
+                "password" to password,
                 "email" to email
                 // Agrega aquí otros campos que desees guardar
             )
@@ -228,8 +256,9 @@ class AuthActivity : AppCompatActivity(){
                     Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference)
 
                     // Crear la colección "JugadoresFav" dentro del documento de usuario
-                    val jugadoresFav: MutableMap<String, Any> = HashMap()
-                    db.collection("users").document(email).collection("JugadoresFav").document()
+/*                    val jugadoresFav: MutableMap<String, Any> = HashMap()
+                    db.collection("users").document(email).collection("JugadoresFav")
+                        .document()
                         .set(jugadoresFav)
                         .addOnSuccessListener {
                             // Colección "JugadoresFav" creada exitosamente
@@ -238,7 +267,7 @@ class AuthActivity : AppCompatActivity(){
                         .addOnFailureListener { e ->
                             // Error al crear la colección "JugadoresFav"
                             Log.w(TAG, "Error al crear la colección JugadoresFav", e)
-                        }
+                        }*/
                 }
                 .addOnFailureListener(OnFailureListener { e ->
                     Log.w(TAG, "Error adding document", e)
@@ -260,6 +289,9 @@ class AuthActivity : AppCompatActivity(){
                 Log.w(TAG,"Error adding document", e)
             })
     }
+
+
+
 
 
 }

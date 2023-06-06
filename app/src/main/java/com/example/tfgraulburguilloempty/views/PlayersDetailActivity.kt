@@ -81,7 +81,7 @@ class PlayersDetailActivity : AppCompatActivity() {
         emailapasar = intent.getSerializableExtra("emailapasar") as String
         jugadorEncontrado = false
 
-        title = "${jugador.firstName + "  " + jugador.team}"
+        title = "${jugador.lastName + "  " + jugador.team}"
 
         val db = FirebaseFirestore.getInstance() // Inicializar la instancia de Firebase Firestore
         val collectionRef = db.collection("users")
@@ -91,12 +91,17 @@ class PlayersDetailActivity : AppCompatActivity() {
         val fabjugador = findViewById<ExtendedFloatingActionButton>(R.id.fab)
 
         // Obtén el color de fondo actual del botón FAB
-        val buttonColor = fabjugador.backgroundTintList?.defaultColor
+        //val buttonColor = fabjugador.backgroundTintList?.defaultColor
+
+        //Comprobamos si la subcollecion existe para crearla o no
+
+
+
+
 
         //Comprobamos si el jugador esta en favorito o no para cambiar el color del boton
         JugadoresFav.get()
             .addOnSuccessListener { snapshot ->
-
                 for (document in snapshot.documents) {
                     val lastName = document.getString("lastName")
 
@@ -129,6 +134,29 @@ class PlayersDetailActivity : AppCompatActivity() {
 
 
         fabjugador.setOnClickListener {
+            JugadoresFav.get().addOnCompleteListener(){
+                    task ->
+                if (task.isSuccessful) {
+                    val exists = !task.result?.isEmpty!! ?: true
+                    if (!exists) {
+                        // La subcolección JugadoresFav no existe, así que la creamos
+                        val jugadoresFavData = hashMapOf<String, Any>()
+
+                        JugadoresFav.document().set(jugadoresFavData)
+                            .addOnSuccessListener {
+                                // Subcolección creada exitosamente
+                                Log.d(TAG, "Subcolección JugadoresFav creada exitosamente")
+                            }
+                            .addOnFailureListener { e ->
+                                // Error al crear la subcolección JugadoresFav
+                                Log.w(TAG, "Error al crear la subcolección JugadoresFav", e)
+                            }
+                    }
+                } else {
+                    // Error al obtener la subcolección JugadoresFav
+                    Log.w(TAG, "Error al obtener la subcolección JugadoresFav", task.exception)
+                }
+            }
             if (!jugadorEncontrado){
                 JugadoresFav.document(jugador.lastName.toString()).set(jugador)
                     .addOnSuccessListener { documentReference ->
@@ -157,6 +185,8 @@ class PlayersDetailActivity : AppCompatActivity() {
                 msg("Has eliminado a ${jugador.firstName + " " + jugador.lastName} de favoritos")
             }
         }
+
+
         showDetail()
 
     }

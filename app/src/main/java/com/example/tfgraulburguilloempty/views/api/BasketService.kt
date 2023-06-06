@@ -19,12 +19,7 @@ interface BasketService {
     fun getJugadores(): Deferred<Response<List<Player>>>
 
 
-    //@GET("players/team")
-    //fun getPlayersByTeam(@Query("name") name: String): Deferred<Response<List<Team>>>
-
     @GET("players/team")
     fun getPlayersByTeam(@Query("name") teamName: String): Deferred<Response<List<Player>>>
-    @GET("categoria/{idcategoria}/chistes")
-    fun getChistesByCategoria(@Path("idcategoria") idcategoria: String): Deferred<Response<Respuesta>>
 
 }

@@ -47,7 +47,6 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
 
 
 
-
             if (email != null && provider != null) {
                 emailapasar = email
                 provideapasar = provider

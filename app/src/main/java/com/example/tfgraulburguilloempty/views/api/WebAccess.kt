@@ -19,12 +19,13 @@ object WebAccess {
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .baseUrl("https://nba-player-individual-stats.p.rapidapi.com/")
-            .client(
+            .baseUrl("http://www.ies-azarquiel.es/paco/apinba/")
+            //.baseUrl("https://nba-player-individual-stats.p.rapidapi.com/")
+            /*.client(
                 OkHttpClient.Builder()
                     .addInterceptor(HeaderInterceptor())
                     .build()
-            )
+            )*/
             .build()
 
         return@lazy retrofit.create(BasketService::class.java)
