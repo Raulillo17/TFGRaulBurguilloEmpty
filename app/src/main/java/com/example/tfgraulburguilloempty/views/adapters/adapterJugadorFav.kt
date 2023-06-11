@@ -18,7 +18,7 @@ class adapterJugadorFav(
     val layout: Int
 ) : RecyclerView.Adapter<adapterJugadorFav.ViewHolder>() {
 
-    private var dataList: List<Jugador> = emptyList()
+    private var dataList: List<Player> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -35,7 +35,7 @@ class adapterJugadorFav(
         return dataList.size
     }
 
-    internal fun setJugadoresFav(jugadores: List<Jugador>) {
+    internal fun setJugadoresFav(jugadores: List<Player>) {
         this.dataList = jugadores
         notifyDataSetChanged()
     }
@@ -43,7 +43,7 @@ class adapterJugadorFav(
 
     class ViewHolder(viewlayout: View, val context: Context) : RecyclerView.ViewHolder(viewlayout) {
         @SuppressLint("ResourceAsColor")
-        fun bind(dataItem: Jugador){
+        fun bind(dataItem: Player){
             //val dataItemList: List<Respuesta> = listOf(dataItem)// obtén la lista de objetos DataItem
             //val dataItemToCompare: Respuesta = dataItem// obtén el objeto DataItem a comparar
 

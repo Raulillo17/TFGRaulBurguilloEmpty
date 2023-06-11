@@ -140,7 +140,7 @@ class BottomNavigation : AppCompatActivity(), BottomNavigationView.OnNavigationI
 
     }
 
-    fun onClickPlayerFav(v: View){
+   fun onClickJugadorFav(v: View){
         val jugador = v.tag as Player
         val intent = Intent(this, PlayersDetailActivity::class.java)
         intent.putExtra("jugador", jugador)

@@ -31,7 +31,7 @@ import com.squareup.picasso.Picasso
 
 class PlayersDetailActivity : AppCompatActivity() {
 
-    private lateinit var jugadorFav: Any
+    private lateinit var jugadorFav: Player
     private var jugadorEncontrado = false
     private lateinit var emailapasar: String
     private lateinit var nombredelEquipo: String
@@ -80,7 +80,6 @@ class PlayersDetailActivity : AppCompatActivity() {
 
 
         jugador = intent.getSerializableExtra("jugador") as Player
-
         //equipo = intent.getSerializableExtra("equipo") as Team
         emailapasar = intent.getSerializableExtra("emailapasar") as String
         jugadorEncontrado = false
@@ -144,12 +143,12 @@ class PlayersDetailActivity : AppCompatActivity() {
                     .document(emailapasar)
                     .collection("JugadoresFav")
 
-                jugadoresFavRef.whereEqualTo("jugadorId", jugador.id)
+                jugadoresFavRef.whereEqualTo("id", jugador.id)
                     .get()
                     .addOnSuccessListener { querySnapshot ->
                         if (querySnapshot.isEmpty && !jugadorEncontrado) {
                             // El jugador no está en la subcolección, agregarlo
-                            jugadoresFavRef.add(jugador)
+                            jugadoresFavRef.document(jugador.lastName.toString()).set(jugador)
                                 .addOnSuccessListener {
                                     fabjugador.setIconResource(R.drawable.estrella)
                                     fabjugador.text = "Añadido a Favoritos"
@@ -234,9 +233,9 @@ class PlayersDetailActivity : AppCompatActivity() {
         tvPosicionDetail.text = jugador.position.toString()
         tvPeso.text = jugador.weight
         tvAltura.text = jugador.height.toString()
-        tvPorP3.text = jugador.careerPercentageThree.toString()
-        tvPorT2.text = jugador.careerPercentageFieldGoal.toString()
-        tvPorT1.text = jugador.careerPercentageFreethrow.toString()
+        tvPorP3.text = jugador.careerPercentageThree.toString() + " %"
+        tvPorT2.text = jugador.careerPercentageFieldGoal.toString() + " %"
+        tvPorT1.text = jugador.careerPercentageFreethrow.toString() + " %"
         Picasso.get().load("${jugador.headShotURL}").into(ivPlayerDetail)
 
 

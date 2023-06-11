@@ -19,9 +19,9 @@ data class Player (
     val firstName: String? = null,
     val lastName: String? = null,
     val team: String? = null,
-    val position: Position? = null,
+    val position: String? = null,
     val dateOfBirth: String? = null,
-    val height: Height? = null,
+    val height: String? = null,
     val weight: String? = null,
     val jerseyNumber: String? = null,
     val age: String? = null,
@@ -93,4 +93,5 @@ data class Jugador(
 data class Respuesta(
     val jugadores:List<Player>,
     val equipos:List<Team>,
+    val jugadoresFav:List<Jugador>
 ): Serializable
